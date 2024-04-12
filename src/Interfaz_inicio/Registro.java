@@ -11,15 +11,14 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class InicioSesion extends JFrame {
+public class Registro extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textFieldUsuario;
-    private JPasswordField passwordField;
-    private JTextField textFieldNombre;
     private JTextField textFieldApellido1;
     private JTextField textFieldApellido2;
+    private JPasswordField passwordField;
     private JTextField textFieldCorreo;
     private JTextField textFieldFechaNacimiento;
 
@@ -27,7 +26,7 @@ public class InicioSesion extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    InicioSesion frame = new InicioSesion();
+                    Registro frame = new Registro();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -36,7 +35,7 @@ public class InicioSesion extends JFrame {
         });
     }
 
-    public InicioSesion() {
+    public Registro() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -49,39 +48,61 @@ public class InicioSesion extends JFrame {
         contentPane.add(textFieldUsuario);
         textFieldUsuario.setColumns(10);
 
-        JLabel lblUsuario = new JLabel("Usuario");
-        lblUsuario.setBounds(130, 73, 61, 16);
+        JLabel lblUsuario = new JLabel("Nombre de usuario");
+        lblUsuario.setBounds(80, 73, 120, 16);
         contentPane.add(lblUsuario);
 
+        textFieldApellido1 = new JTextField();
+        textFieldApellido1.setBounds(188, 106, 130, 26);
+        contentPane.add(textFieldApellido1);
+        textFieldApellido1.setColumns(10);
+
+        JLabel lblApellido1 = new JLabel("Apellido1");
+        lblApellido1.setBounds(130, 111, 76, 16);
+        contentPane.add(lblApellido1);
+
+        textFieldApellido2 = new JTextField();
+        textFieldApellido2.setBounds(188, 144, 130, 26);
+        contentPane.add(textFieldApellido2);
+        textFieldApellido2.setColumns(10);
+
+        JLabel lblApellido2 = new JLabel("Apellido2");
+        lblApellido2.setBounds(130, 149, 76, 16);
+        contentPane.add(lblApellido2);
+
         passwordField = new JPasswordField();
-        passwordField.setBounds(188, 106, 130, 26);
+        passwordField.setBounds(188, 182, 130, 26);
         contentPane.add(passwordField);
 
         JLabel lblContraseña = new JLabel("Contraseña");
-        lblContraseña.setBounds(110, 111, 76, 16);
+        lblContraseña.setBounds(110, 187, 76, 16);
         contentPane.add(lblContraseña);
 
-        JButton btnIniciarSesion = new JButton("Iniciar Sesión");
-        btnIniciarSesion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Aquí puedes agregar la lógica para iniciar sesión
-            }
-        });
-        btnIniciarSesion.setBounds(157, 144, 117, 29);
-        contentPane.add(btnIniciarSesion);
+        textFieldCorreo = new JTextField();
+        textFieldCorreo.setBounds(188, 220, 130, 26);
+        contentPane.add(textFieldCorreo);
+        textFieldCorreo.setColumns(10);
+
+        JLabel lblCorreo = new JLabel("Correo");
+        lblCorreo.setBounds(130, 225, 61, 16);
+        contentPane.add(lblCorreo);
+
+        textFieldFechaNacimiento = new JTextField();
+        textFieldFechaNacimiento.setBounds(188, 258, 130, 26);
+        contentPane.add(textFieldFechaNacimiento);
+        textFieldFechaNacimiento.setColumns(10);
+
+        JLabel lblFechaNacimiento = new JLabel("Fecha de nacimiento");
+        lblFechaNacimiento.setBounds(60, 263, 130, 16);
+        contentPane.add(lblFechaNacimiento);
 
         JButton btnRegistrarse = new JButton("Registrarse");
         btnRegistrarse.addActionListener(new ActionListener() {
-        	@Override
             public void actionPerformed(ActionEvent e) {
-                Registro ventanaRegistro= new Registro();
-                ventanaRegistro.setVisible(true);
-                dispose();
-               }
+                // Aquí puedes agregar la lógica para registrarse
+            }
         });
-        btnRegistrarse.setBounds(157, 185, 117, 29);
+        btnRegistrarse.setBounds(157, 296, 117, 29);
         contentPane.add(btnRegistrarse);
-
     }
 }
-
