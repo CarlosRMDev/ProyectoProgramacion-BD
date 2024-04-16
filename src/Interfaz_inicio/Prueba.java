@@ -11,7 +11,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class InicioSesion extends JFrame {
+public class Prueba extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -27,7 +27,7 @@ public class InicioSesion extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    InicioSesion frame = new InicioSesion();
+                    Prueba frame = new Prueba();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -36,7 +36,7 @@ public class InicioSesion extends JFrame {
         });
     }
 
-    public InicioSesion() {
+    public Prueba() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -74,8 +74,7 @@ public class InicioSesion extends JFrame {
         btnRegistrarse.addActionListener(new ActionListener() {
         	@Override
             public void actionPerformed(ActionEvent e) {
-                Registro ventanaRegistro= new Registro();
-                ventanaRegistro.setVisible(true);
+                
                 dispose();
                }
         });
