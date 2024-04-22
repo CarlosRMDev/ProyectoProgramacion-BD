@@ -11,12 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.SwingConstants;
+import java.awt.Component;
 
 public class InicioSesion extends JFrame {
 
@@ -45,90 +48,74 @@ public class InicioSesion extends JFrame {
 
     public InicioSesion() {
     	// Configuración de la ventana
-    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
+    
     	setBounds(100, 100, 450, 300);
+    	this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+        
 
     	// Configuración del panel principal
     	contentPane = new JPanel();
     	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
     	contentPane.setBackground(Color.DARK_GRAY); // Color de fondo
     	setContentPane(contentPane);
-    	GridBagLayout gbl_contentPane = new GridBagLayout();
-    	contentPane.setLayout(gbl_contentPane);
+    	contentPane.setLayout(null);
 
     	// Configuración de la etiqueta "Usuario"
     	JLabel lblUsuario = new JLabel("Usuario");
+    	lblUsuario.setBounds(78, 49, 55, 19);
     	lblUsuario.setForeground(Color.GREEN); // Color del texto
-    	lblUsuario.setFont(new Font("Miriam Libre", Font.BOLD, 14)); // Fuente gaming
-    	GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
-    	gbc_lblUsuario.insets = new Insets(0, 0, 5, 5);
-    	gbc_lblUsuario.gridx = 0;
-    	gbc_lblUsuario.gridy = 0;
-    	contentPane.add(lblUsuario, gbc_lblUsuario);
+    	lblUsuario.setFont(new Font("Miriam Libre", Font.BOLD, 14));
+    	contentPane.add(lblUsuario);
 
     	// Configuración del campo de texto del usuario
     	textFieldUsuario = new JTextField();
+    	textFieldUsuario.setBounds(144, 46, 230, 24);
     	textFieldUsuario.setForeground(Color.BLACK);
     	textFieldUsuario.setColumns(10);
-    	textFieldUsuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 12)); 
-    	GridBagConstraints gbc_textFieldUsuario = new GridBagConstraints();
-    	gbc_textFieldUsuario.insets = new Insets(0, 0, 5, 0);
-    	gbc_textFieldUsuario.fill = GridBagConstraints.HORIZONTAL;
-    	gbc_textFieldUsuario.gridx = 1;
-    	gbc_textFieldUsuario.gridy = 0;
-    	contentPane.add(textFieldUsuario, gbc_textFieldUsuario);
+    	textFieldUsuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+    	contentPane.add(textFieldUsuario);
 
     	// Configuración de la etiqueta "Contraseña"
     	JLabel lblContraseña = new JLabel("Contraseña");
+    	lblContraseña.setBounds(60, 97, 79, 19);
     	lblContraseña.setForeground(Color.GREEN); // Color del texto
     	lblContraseña.setFont(new Font("Miriam Libre", Font.BOLD, 14));
-    	GridBagConstraints gbc_lblContraseña = new GridBagConstraints();
-    	gbc_lblContraseña.insets = new Insets(0, 0, 5, 5);
-    	gbc_lblContraseña.gridx = 0;
-    	gbc_lblContraseña.gridy = 1;
-    	contentPane.add(lblContraseña, gbc_lblContraseña);
+    	contentPane.add(lblContraseña);
+    	
+    	    	// Configuración del botón "Registrarse"
+    	    	JButton btnRegistrarse = new JButton("Registrarse");
+    	    	btnRegistrarse.setBounds(194, 225, 125, 25);
+    	    	btnRegistrarse.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+    	    	btnRegistrarse.setForeground(Color.BLACK);
+    	    	btnRegistrarse.setBackground(Color.WHITE);
+    	    	btnRegistrarse.setFont(new Font("Miriam Libre", Font.BOLD, 12)); // Aumenta el tamaño de la fuente
+    	    	btnRegistrarse.setPreferredSize(new Dimension(125, 25)); // Aumenta el tamaño del botón
+    	    	btnRegistrarse.addActionListener(e -> {
+    	    	    dispose();
+    	    	    Registro registro = new Registro();
+    	    	    registro.setVisible(true);
+
+    	    	});
+    	    	contentPane.add(btnRegistrarse);
 
     	// Configuración del campo de texto de la contraseña
     	passwordField = new JPasswordField();
+    	passwordField.setBounds(144, 101, 230, 24);
     	passwordField.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
-    	GridBagConstraints gbc_passwordField = new GridBagConstraints();
-    	gbc_passwordField.insets = new Insets(0, 0, 5, 0);
-    	gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
-    	gbc_passwordField.gridx = 1;
-    	gbc_passwordField.gridy = 1;
-    	contentPane.add(passwordField, gbc_passwordField);
-
-    	// Configuración del botón "Iniciar Sesión"
-    	JButton btnIniciarSesion = new JButton("Iniciar Sesión");
-    	btnIniciarSesion.setForeground(Color.BLACK); // Color del texto
-    	btnIniciarSesion.setBackground(Color.WHITE); // Color de fondo
-    	btnIniciarSesion.setFont(new Font("Miriam Libre", Font.BOLD, 24)); // Fuente gaming
-    	btnIniciarSesion.setPreferredSize(getPreferredSize());
-    	btnIniciarSesion.addActionListener(e -> {
-    	    // Aquí puedes agregar la lógica para iniciar sesión
-    	});
-    	GridBagConstraints gbc_btnIniciarSesion = new GridBagConstraints();
-    	gbc_btnIniciarSesion.insets = new Insets(0, 0, 5, 0);
-    	gbc_btnIniciarSesion.gridx = 1;
-    	gbc_btnIniciarSesion.gridy = 2;
-    	contentPane.add(btnIniciarSesion, gbc_btnIniciarSesion);
-
-    	// Configuración del botón "Registrarse"
-    	JButton btnRegistrarse = new JButton("Registrarse");
-    	btnRegistrarse.setForeground(Color.BLACK);
-    	btnRegistrarse.setBackground(Color.WHITE);
-    	btnRegistrarse.setFont(new Font("Miriam Libre", Font.BOLD, 12)); // Aumenta el tamaño de la fuente
-    	btnRegistrarse.setPreferredSize(new Dimension(200, 50)); // Aumenta el tamaño del botón
-    	btnRegistrarse.addActionListener(e -> {
-    	    dispose();
-    	    Registro registro = new Registro();
-    	    registro.setVisible(true);
-
-    	});
-    	GridBagConstraints gbc_btnRegistrarse = new GridBagConstraints();
-    	gbc_btnRegistrarse.gridx = 1;
-    	gbc_btnRegistrarse.gridy = 3;
-    	contentPane.add(btnRegistrarse, gbc_btnRegistrarse);
+    	contentPane.add(passwordField);
+    	
+    	    	// Configuración del botón "Iniciar Sesión"
+    	    	JButton btnIniciarSesion = new JButton("Iniciar Sesión");
+    	    	btnIniciarSesion.setBounds(144, 174, 230, 40);
+    	    	btnIniciarSesion.setForeground(Color.BLACK); // Color del texto
+    	    	btnIniciarSesion.setBackground(Color.WHITE); // Color de fondo
+    	    	btnIniciarSesion.setFont(new Font("Miriam Libre", Font.BOLD, 24)); // Fuente 
+    	    	btnIniciarSesion.setPreferredSize(new Dimension(230, 40));
+    	    	btnIniciarSesion.addActionListener(e -> {
+    	    	    // Aquí puedes agregar la lógica para iniciar sesión
+    	    	});
+    	    	contentPane.add(btnIniciarSesion);
     }
 }
