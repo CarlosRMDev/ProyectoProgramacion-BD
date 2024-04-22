@@ -1,4 +1,4 @@
-package Interfaz_inicio;
+package InterfazInicio;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -21,6 +21,8 @@ public class Registro extends JFrame {
     private JPasswordField passwordField;
     private JTextField textFieldCorreo;
     private JTextField textFieldFechaNacimiento;
+    
+    // Creación de la ventana de registro
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -35,8 +37,10 @@ public class Registro extends JFrame {
         });
     }
 
+    //Vamos a crear cada uno de los bloques necesarios para realizar el registro.
+    //Tenemos que unir todos los bloques de registro con nuestra base de datos.
     public Registro() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Esto es para que la X sea para cerrar el programa
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -55,8 +59,10 @@ public class Registro extends JFrame {
         textFieldApellido1 = new JTextField();
         textFieldApellido1.setBounds(188, 106, 130, 26);
         contentPane.add(textFieldApellido1);
-        textFieldApellido1.setColumns(10);
+        textFieldApellido1.setColumns(20);
 
+        // VENTANA DE APELLIDO 1
+        
         JLabel lblApellido1 = new JLabel("Apellido1");
         lblApellido1.setBounds(130, 111, 76, 16);
         contentPane.add(lblApellido1);
@@ -106,3 +112,4 @@ public class Registro extends JFrame {
         contentPane.add(btnRegistrarse);
     }
 }
+

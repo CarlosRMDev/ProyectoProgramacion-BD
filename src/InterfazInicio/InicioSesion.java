@@ -1,4 +1,4 @@
-package Interfaz_inicio;
+package InterfazInicio;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -38,6 +38,7 @@ public class InicioSesion extends JFrame {
 
     public InicioSesion() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,7 +75,8 @@ public class InicioSesion extends JFrame {
         btnRegistrarse.addActionListener(new ActionListener() {
         	@Override
             public void actionPerformed(ActionEvent e) {
-                
+                Registro registro = new Registro();
+                registro.setVisible(true);
                 dispose();
                }
         });
