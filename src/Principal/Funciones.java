@@ -6,7 +6,7 @@ import BaseDatos.ConexionMySQL;
 
 public class Funciones {
 	//Funcion para añadir el nombre a la base
-	public void AñadirNombre(String nombre) {
+	public static void AnadirNombre(String nombre) {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		
 		try {
@@ -30,7 +30,7 @@ public class Funciones {
 			}
 		}
 	}
-	public void AñadirApellido1(String apellidos1) {
+	public static void AnadirApellido1(String apellidos1) {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		
 		try {
@@ -54,7 +54,7 @@ public class Funciones {
 			}
 		}
 	}
-	public void AñadirApellido2(String apellidos2) {
+	public static void AnadirApellido2(String apellidos2) {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		
 		try {
@@ -78,7 +78,7 @@ public class Funciones {
 			}
 		}
 	}
-	public void AñadirNombreUsuario(String usuario) {
+	public static void AnadirNombreUsuario(String usuario) {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		
 		try {
@@ -102,7 +102,7 @@ public class Funciones {
 			}
 		}
 	}
-	public void AñadirCorreo(String correoElectronico) {
+	public static void AnadirCorreo(String correoElectronico) {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		
 		try {
@@ -126,7 +126,7 @@ public class Funciones {
 			}
 		}
 	}
-	public void AñadirContrasena(String contrasena) {
+	public static void AnadirContrasena(String contrasena) {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		
 		try {
@@ -147,7 +147,7 @@ public class Funciones {
 			}
 		}
 	}
-	public boolean ConfirmarContrasena(String contr, String compContr) {
+	public static boolean ConfirmarContrasena(String contr, String compContr) {
 		if (contr == compContr) {
 			return true;
 		}

@@ -1,9 +1,14 @@
 package Principal;
 
+import InterfazInicio.InicioSesion;
+
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// Aplicación 
+		
+		InicioSesion iS = new InicioSesion();
+		iS.setVisible(true);
 
 	}
 
