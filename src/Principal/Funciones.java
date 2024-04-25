@@ -1,4 +1,4 @@
-package InterfazInicio;
+package Principal;
 
 import java.sql.SQLException;
 
@@ -147,4 +147,13 @@ public class Funciones {
 			}
 		}
 	}
+	public boolean ConfirmarContrasena(String contr, String compContr) {
+		if (contr == compContr) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 }
