@@ -126,10 +126,25 @@ public class Funciones {
 			}
 		}
 	}
-	public void AñadirContraseña(String contraseña) {
+	public void AñadirContrasena(String contrasena) {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		
+		try {
+			conexion.conectar();
+			String sentencia = "INSERT INTO Usuarios (contraseña) VALUES ( '" + contrasena + "')";
+			
+			conexion.ejecutarInsertDeleteUpdate(sentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-
-
-
 }
