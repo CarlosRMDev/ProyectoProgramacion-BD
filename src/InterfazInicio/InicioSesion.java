@@ -127,7 +127,7 @@ public class InicioSesion extends JFrame {
                 // Cierra la ventana de Inicio de Sesión
                 dispose();
                 // Abre la ventana de Registro
-                Registro registro = new Registro();
+                Registrar registro = new Registrar();
                 registro.setVisible(true);
             }
         });
