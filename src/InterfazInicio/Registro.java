@@ -78,7 +78,7 @@ public class Registro extends JFrame {
         gbc.gridy = 0;
         contentPane.add(textFieldUsuario, gbc_textFieldUsuario);
         
-        JLabel lblApellido1 = new JLabel("Apellido1");
+        JLabel lblApellido1 = new JLabel("1-Apellido");
         lblApellido1.setForeground(Color.GREEN);
         lblApellido1.setFont(new Font("Miriam Libre", Font.BOLD, 14));
         GridBagConstraints gbc_lblApellido1 = new GridBagConstraints();
@@ -95,7 +95,7 @@ public class Registro extends JFrame {
         gbc.gridy = 1;
         contentPane.add(textFieldApellido1, gbc_textFieldApellido1);
 
-        JLabel lblApellido2 = new JLabel("Apellido2");
+        JLabel lblApellido2 = new JLabel("2-Apellido");
         lblApellido2.setForeground(Color.GREEN);
         lblApellido2.setFont(new Font("Miriam Libre", Font.BOLD, 14));
         GridBagConstraints gbc_lblApellido2 = new GridBagConstraints();
