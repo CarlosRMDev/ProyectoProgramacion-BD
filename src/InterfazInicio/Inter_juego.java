@@ -5,12 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Juego.CircleGame;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 import java.awt.Button;
@@ -71,6 +76,21 @@ public class Inter_juego extends JFrame {
 		boton_juego1.setIcon(new ImageIcon("Imagenes/juego1.png"));
 		boton_juego1.setBounds(645, 345, 617, 128);
 		contentPane.add(boton_juego1);
+		boton_juego1.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // Crear una instancia de CircleGame
+		        CircleGame circleGame = new CircleGame();
+		        
+		        // Hacer visible la ventana del juego
+		        circleGame.setVisible(true);
+		        
+		        // Cerrar la ventana actual si es necesario
+		        dispose(); // Este método cierra la ventana actual donde se encuentra el botón
+		    }
+		});
+
+		
 		
 		JLabel lblNewLabel = new JLabel("MENÚ DE JUEGOS");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);

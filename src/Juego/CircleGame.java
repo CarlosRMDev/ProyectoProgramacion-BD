@@ -16,6 +16,8 @@ public class CircleGame extends JFrame {
     private Timer timer;
 
     public CircleGame() {
+    	getContentPane().setBackground(Color.CYAN);
+    	setBackground(Color.CYAN);
         setTitle("Circle Game");
         setUndecorated(true); // Elimina la decoración de la ventana para pantalla completa
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Establece la ventana en modo de pantalla completa
