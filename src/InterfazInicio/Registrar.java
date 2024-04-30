@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Principal.Funciones;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -12,18 +15,21 @@ import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Registrar extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNombre;
-	private JTextField txtApellido1;
-	private JTextField txtApellido2;
-	private JTextField txtUsuario;
-	private JTextField txtCorreo;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	public static JTextField txtNombre;
+	public static JTextField txtApellido1;
+	public static JTextField txtApellido2;
+	public static JTextField txtUsuario;
+	public static JTextField txtCorreo;
+	public static JPasswordField passwordField;
+	public static JPasswordField passwordField_1;
 
 	/**
 	 * Launch the application.
@@ -192,5 +198,14 @@ public class Registrar extends JFrame {
 		});
 		passwordField_1.setBounds(286, 221, 173, 20);
 		contentPane.add(passwordField_1);
+		
+		JButton btnRegistro = new JButton("Registrarse");
+		btnRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Funciones.Registro();
+			}
+		});
+		btnRegistro.setBounds(203, 289, 199, 43);
+		contentPane.add(btnRegistro);
 	}
 }

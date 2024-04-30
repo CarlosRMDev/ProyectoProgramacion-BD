@@ -1,6 +1,9 @@
 package Principal;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 
 import BaseDatos.ConexionMySQL;
 
@@ -38,7 +41,7 @@ public class Funciones {
 			
 			//Sentencia para añadir el nombre
 			
-			String sentencia = "INSERT INTO Usuarios (apellidos1) VALUES ( '" + apellidos1 + "')";
+			String sentencia = "INSERT INTO Usuarios (primerApellido) VALUES ( '" + apellidos1 + "')";
 			
 			conexion.ejecutarInsertDeleteUpdate(sentencia);
 		} catch (SQLException e) {
@@ -62,7 +65,7 @@ public class Funciones {
 			
 			//Sentencia para añadir el nombre
 			
-			String sentencia = "INSERT INTO Usuarios (apellidos2) VALUES ( '" + apellidos2 + "')";
+			String sentencia = "INSERT INTO Usuarios (segundoApellido) VALUES ( '" + apellidos2 + "')";
 			
 			conexion.ejecutarInsertDeleteUpdate(sentencia);
 		} catch (SQLException e) {
@@ -126,12 +129,12 @@ public class Funciones {
 			}
 		}
 	}
-	public static void AnadirContrasena(String contrasena) {
+	public static void AnadirContrasena(String cs) {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		
 		try {
 			conexion.conectar();
-			String sentencia = "INSERT INTO Usuarios (contraseña) VALUES ( '" + contrasena + "')";
+			String sentencia = "INSERT INTO Usuarios (contraseña) VALUES ( '" + cs + "')";
 			
 			conexion.ejecutarInsertDeleteUpdate(sentencia);
 		} catch (SQLException e) {
@@ -156,4 +159,56 @@ public class Funciones {
 		}
 	}
 	
+	public static void Registro () {
+		String nombre = InterfazInicio.Registrar.txtNombre.getText();
+		String apellido1 = InterfazInicio.Registrar.txtApellido1.getText();
+		String apellido2 = InterfazInicio.Registrar.txtApellido2.getText();
+		String usuario = InterfazInicio.Registrar.txtUsuario.getText();
+		String correo = InterfazInicio.Registrar.txtCorreo.getText();
+		char[] pass	= InterfazInicio.Registrar.passwordField.getPassword();
+		char[] confPass = InterfazInicio.Registrar.passwordField_1.getPassword();
+		String contrasena = new String (pass); 
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM Usuarios";
+			ResultSet datos;
+			datos = conexion.ejecutarSelect(sentencia);
+				while (datos.next()) {					
+					if (datos.getString("nombreUsuario").equals(usuario) || !pass.equals(confPass)) {
+						/*InterfazInicio.Registrar.txtUsuario.setText("");
+						InterfazInicio.Registrar.txtNombre.setText("");
+						InterfazInicio.Registrar.txtApellido1.setText("");
+						InterfazInicio.Registrar.txtApellido2.setText("");
+						InterfazInicio.Registrar.txtCorreo.setText("");
+						InterfazInicio.Registrar.passwordField.setText("");
+						InterfazInicio.Registrar.passwordField_1.setText("");*/
+						
+						JOptionPane.showMessageDialog(null, "Nombre o contraseña incorrectos");
+					}
+					else {
+						String insertar = "INSERT INTO Usuarios (nombre, primerApellido, segundoApellido, correoElectronico, nombreUsuario, contraseña)"
+								+ " VALUES ('" + nombre + "', '" + apellido1 + "', '" + apellido2 + "', '" + correo + "', '" + usuario + "', '"
+								+ contrasena + "')";
+						conexion.ejecutarInsertDeleteUpdate(insertar);
+						System.out.println("Insertado correctamente");
+					}
+				}
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}	
 }
