@@ -9,6 +9,9 @@ import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Principal.Funciones;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -22,8 +25,9 @@ public class InicioSesion extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textFieldUsuario;
-    private JPasswordField passwordField;
+    public static JTextField textFieldUsuario;
+    public static JPasswordField passwordField;
+	public static Object gbc_textFieldUsuario;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -96,6 +100,11 @@ public class InicioSesion extends JFrame {
 
         // Configuración del botón "Iniciar Sesión" centrado
         JButton btnIniciarSesion = new JButton("Iniciar Sesión");
+        btnIniciarSesion.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Funciones.InicioSesion();
+        	}
+        });
         btnIniciarSesion.setForeground(Color.BLACK); // Color del texto
         btnIniciarSesion.setBackground(Color.WHITE); // Color de fondo
         btnIniciarSesion.setFont(new Font("Miriam Libre", Font.BOLD, 24)); // Fuente
