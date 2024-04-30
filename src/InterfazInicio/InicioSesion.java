@@ -102,7 +102,7 @@ public class InicioSesion extends JFrame {
         JButton btnIniciarSesion = new JButton("Iniciar Sesión");
         btnIniciarSesion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		Funciones.InicioSesion();
+        		
         	}
         });
         btnIniciarSesion.setForeground(Color.BLACK); // Color del texto

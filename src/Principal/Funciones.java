@@ -81,13 +81,10 @@ public class Funciones {
 			ResultSet comprobar = conexion.ejecutarSelect(sentenciaPass);
 			
 			while(datos.next()) {
-				while (comprobar.next()) {
-					if (comprobar.getString(1).equals(contrasena)) {
-						System.out.println("Iniciado correctamente");
-						Inter_juego intjuego = new Inter_juego();
-						intjuego.setVisible(true);
-						
-					}
+				if (comprobar.getString(1).equals(contrasena)) {
+					System.out.println("Iniciado correctamente");
+					Inter_juego intjuego = new Inter_juego();
+					intjuego.setVisible(true);					
 				}
 			}
 			
