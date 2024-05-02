@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 22-04-2024 a las 12:51:49
+-- Tiempo de generación: 02-05-2024 a las 10:27:07
 -- Versión del servidor: 8.3.0
 -- Versión de PHP: 8.2.8
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `EstadisticasJuego2` (
   `idEstadisticasJuego2` int NOT NULL,
-  `Puntos` int DEFAULT NULL
+  `Puntos` int DEFAULT NULL,
+  `Usuarios_idUsuarios` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
@@ -40,7 +41,8 @@ CREATE TABLE `EstadisticasJuego2` (
 
 CREATE TABLE `EstadisticasJuego3` (
   `idEstadisticasJuego3` int NOT NULL,
-  `Puntos` int DEFAULT NULL
+  `Puntos` int DEFAULT NULL,
+  `Usuarios_idUsuarios` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
@@ -51,7 +53,9 @@ CREATE TABLE `EstadisticasJuego3` (
 
 CREATE TABLE `EstadisticasPelota` (
   `idEstadisticasPelota` int NOT NULL,
-  `Puntos` int DEFAULT NULL
+  `Puntos` int DEFAULT NULL,
+  `MaxTiempo` int DEFAULT NULL,
+  `Usuarios_idUsuarios` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
@@ -62,15 +66,12 @@ CREATE TABLE `EstadisticasPelota` (
 
 CREATE TABLE `Usuarios` (
   `idUsuarios` int NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `apellidos 1` varchar(45) NOT NULL,
-  `apellidos 2` varchar(45) NOT NULL,
+  `nombre` varchar(15) NOT NULL,
+  `primerApellido` varchar(20) NOT NULL,
+  `segundoApellido` varchar(20) NOT NULL,
   `correoElectronico` varchar(45) NOT NULL,
   `nombreUsuario` varchar(15) NOT NULL,
-  `contraseña` varchar(45) NOT NULL,
-  `EstadisticasPelota_idEstadisticasPelota` int NOT NULL,
-  `EstadisticasJuego2_idEstadisticasJuego2` int NOT NULL,
-  `EstadisticasJuego3_idEstadisticasJuego3` int NOT NULL
+  `contraseña` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -81,30 +82,29 @@ CREATE TABLE `Usuarios` (
 -- Indices de la tabla `EstadisticasJuego2`
 --
 ALTER TABLE `EstadisticasJuego2`
-  ADD PRIMARY KEY (`idEstadisticasJuego2`);
+  ADD PRIMARY KEY (`idEstadisticasJuego2`,`Usuarios_idUsuarios`),
+  ADD KEY `fk_EstadisticasJuego2_Usuarios1_idx` (`Usuarios_idUsuarios`);
 
 --
 -- Indices de la tabla `EstadisticasJuego3`
 --
 ALTER TABLE `EstadisticasJuego3`
-  ADD PRIMARY KEY (`idEstadisticasJuego3`);
+  ADD PRIMARY KEY (`idEstadisticasJuego3`,`Usuarios_idUsuarios`),
+  ADD KEY `fk_EstadisticasJuego3_Usuarios1_idx` (`Usuarios_idUsuarios`);
 
 --
 -- Indices de la tabla `EstadisticasPelota`
 --
 ALTER TABLE `EstadisticasPelota`
-  ADD PRIMARY KEY (`idEstadisticasPelota`);
+  ADD PRIMARY KEY (`idEstadisticasPelota`,`Usuarios_idUsuarios`),
+  ADD KEY `fk_EstadisticasPelota_Usuarios_idx` (`Usuarios_idUsuarios`);
 
 --
 -- Indices de la tabla `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  ADD PRIMARY KEY (`idUsuarios`,`EstadisticasPelota_idEstadisticasPelota`,`EstadisticasJuego2_idEstadisticasJuego2`,`EstadisticasJuego3_idEstadisticasJuego3`),
-  ADD UNIQUE KEY `nombreUsuario_UNIQUE` (`nombreUsuario`),
-  ADD UNIQUE KEY `correoElectronico_UNIQUE` (`correoElectronico`),
-  ADD KEY `fk_Usuarios_EstadisticasPelota1_idx` (`EstadisticasPelota_idEstadisticasPelota`),
-  ADD KEY `fk_Usuarios_EstadisticasJuego21_idx` (`EstadisticasJuego2_idEstadisticasJuego2`),
-  ADD KEY `fk_Usuarios_EstadisticasJuego31_idx` (`EstadisticasJuego3_idEstadisticasJuego3`);
+  ADD PRIMARY KEY (`idUsuarios`),
+  ADD UNIQUE KEY `nombreUsuario_UNIQUE` (`nombreUsuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -132,19 +132,29 @@ ALTER TABLE `EstadisticasPelota`
 -- AUTO_INCREMENT de la tabla `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `idUsuarios` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuarios` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `Usuarios`
+-- Filtros para la tabla `EstadisticasJuego2`
 --
-ALTER TABLE `Usuarios`
-  ADD CONSTRAINT `fk_Usuarios_EstadisticasJuego21` FOREIGN KEY (`EstadisticasJuego2_idEstadisticasJuego2`) REFERENCES `EstadisticasJuego2` (`idEstadisticasJuego2`),
-  ADD CONSTRAINT `fk_Usuarios_EstadisticasJuego31` FOREIGN KEY (`EstadisticasJuego3_idEstadisticasJuego3`) REFERENCES `EstadisticasJuego3` (`idEstadisticasJuego3`),
-  ADD CONSTRAINT `fk_Usuarios_EstadisticasPelota1` FOREIGN KEY (`EstadisticasPelota_idEstadisticasPelota`) REFERENCES `EstadisticasPelota` (`idEstadisticasPelota`);
+ALTER TABLE `EstadisticasJuego2`
+  ADD CONSTRAINT `fk_EstadisticasJuego2_Usuarios1` FOREIGN KEY (`Usuarios_idUsuarios`) REFERENCES `Usuarios` (`idUsuarios`);
+
+--
+-- Filtros para la tabla `EstadisticasJuego3`
+--
+ALTER TABLE `EstadisticasJuego3`
+  ADD CONSTRAINT `fk_EstadisticasJuego3_Usuarios1` FOREIGN KEY (`Usuarios_idUsuarios`) REFERENCES `Usuarios` (`idUsuarios`);
+
+--
+-- Filtros para la tabla `EstadisticasPelota`
+--
+ALTER TABLE `EstadisticasPelota`
+  ADD CONSTRAINT `fk_EstadisticasPelota_Usuarios` FOREIGN KEY (`Usuarios_idUsuarios`) REFERENCES `Usuarios` (`idUsuarios`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
