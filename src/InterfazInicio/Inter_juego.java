@@ -5,12 +5,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Juego.AdivinaElNumero;
+import Juego.CircleGame;
+import Juego.PreguntasYRespuestas;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 import java.awt.Button;
@@ -61,16 +68,56 @@ public class Inter_juego extends JFrame {
 		boton_juego3.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Desktop\\juego3 real.png"));
 		boton_juego3.setBounds(638, 683, 617, 128);
 		contentPane.add(boton_juego3);
+		boton_juego3.addActionListener((ActionListener) new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // Crear una instancia de la clase OtroArchivo
+		    	PreguntasYRespuestas preg = new PreguntasYRespuestas();
+		        
+		        // Hacer visible la ventana del otro archivo
+		        preg.setVisible(true);
+		        
+		        // Cerrar la ventana actual si es necesario
+		        dispose();
+		    }
+		});
 		
 		JButton boton_juego2 = new JButton("");
 		boton_juego2.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Desktop\\juego2.png"));
 		boton_juego2.setBounds(645, 519, 610, 121);
 		contentPane.add(boton_juego2);
+		boton_juego2.addActionListener((ActionListener) new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // Crear una instancia de la clase OtroArchivo
+		    	AdivinaElNumero numero = new AdivinaElNumero();
+		        
+		        // Hacer visible la ventana del otro archivo
+		        numero.setVisible(true);
+		        
+		        // Cerrar la ventana actual si es necesario
+		        dispose();
+		    }
+		});
 		
 		JButton boton_juego1 = new JButton("");
 		boton_juego1.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Desktop\\juego1.png"));
 		boton_juego1.setBounds(645, 345, 617, 128);
 		contentPane.add(boton_juego1);
+		boton_juego1.addActionListener((ActionListener) new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // Crear una instancia de la clase OtroArchivo
+		    	CircleGame circulo = new CircleGame();
+		        
+		        // Hacer visible la ventana del otro archivo
+		        circulo.setVisible(true);
+		        
+		        // Cerrar la ventana actual si es necesario
+		        dispose();
+		    }
+		});
+
 		
 		JLabel lblNewLabel = new JLabel("MENÚ DE JUEGOS");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);

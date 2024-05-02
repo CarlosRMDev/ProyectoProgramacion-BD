@@ -11,202 +11,110 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class CircleGame extends JFrame {
-    private JLabel preguntaLabel;
-    private JRadioButton[] opciones;
-    private JButton responderButton;
-    private int preguntaActual;
-    private int respuestasCorrectas;
-    private int respuestasIncorrectas;
-    private int respuestasTotales;
-    private long tiempoTotal;
-    private int rachaCorrectas;
-    private int mejorRachaCorrectas;
-    private int[] categoriasCorrectas;
-    private int[] categoriasIncorrectas;
-
-    private String[] preguntas = {
-        "¿Cuál es la capital de Francia?",
-        "¿Cuál es el planeta más grande del sistema solar?",
-        "¿Quién escribió 'Don Quijote de la Mancha'?",
-        "¿En qué año comenzó la Segunda Guerra Mundial?",
-        "¿Quién pintó la 'Mona Lisa'?",
-        "¿Cuál es la montaña más alta del mundo?",
-        "¿Cuál es el océano más grande del mundo?",
-        "¿Cuál es el río más largo del mundo?",
-        "¿Cuál es el país más grande del mundo?",
-        "¿Quién descubrió América?"
-    };
-
-    private String[][] opcionesRespuestas = {
-        {"Madrid", "París", "Roma"},
-        {"Júpiter", "Saturno", "Neptuno"},
-        {"Miguel de Cervantes", "William Shakespeare", "Gabriel García Márquez"},
-        {"1939", "1941", "1945"},
-        {"Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh"},
-        {"Monte Everest", "Monte Kilimanjaro", "Monte McKinley"},
-        {"Pacífico", "Atlántico", "Índico"},
-        {"Nilo", "Amazonas", "Yangtsé"},
-        {"Rusia", "China", "Canadá"},
-        {"Cristóbal Colón", "Vasco da Gama", "Fernando de Magallanes"}
-    };
-
-    private int[] respuestasCorrectasIndices = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}; // Índice de la respuesta correcta para cada pregunta
+    private int circleX;
+    private int circleY;
+    private int circleRadius = 50;
+    private int score = 0;
+    private long startTime;
+    private Timer timer;
 
     public CircleGame() {
-        setTitle("Preguntas y Respuestas");
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Abrir en pantalla completa
-        setUndecorated(true); // Eliminar bordes de la ventana
+        setTitle("Circle Game");
+        setUndecorated(true); // Elimina la decoración de la ventana para pantalla completa
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Establece la ventana en modo de pantalla completa
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(5, 1));
 
-        Font fuentePregunta = new Font("Arial", Font.BOLD, 24); // Fuente más grande para la pregunta
-        Font fuenteOpciones = new Font("Arial", Font.PLAIN, 20); // Fuente más grande para las opciones
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int mouseX = e.getX();
+                int mouseY = e.getY();
 
-        preguntaLabel = new JLabel();
-        preguntaLabel.setFont(fuentePregunta);
-        preguntaLabel.setHorizontalAlignment(JLabel.CENTER);
-        add(preguntaLabel);
+                if (isInsideCircle(mouseX, mouseY)) {
+                    score++;
+                    timer.restart(); // Reinicia el temporizador si el usuario hace clic
+                } else {
+                    showResultDialog(); // Muestra la ventana de resultado si el usuario falla
+                }
 
-        opciones = new JRadioButton[3];
-        ButtonGroup grupoOpciones = new ButtonGroup();
-        for (int i = 0; i < opciones.length; i++) {
-            opciones[i] = new JRadioButton();
-            opciones[i].setFont(fuenteOpciones);
-            grupoOpciones.add(opciones[i]);
-            add(opciones[i]);
-        }
+                generateRandomCirclePosition();
+                repaint(); // Actualiza la ventana
+            }
+        });
 
-        responderButton = new JButton("Responder");
-        responderButton.setFont(new Font("Arial", Font.BOLD, 20));
-        responderButton.setForeground(Color.WHITE);
-        responderButton.setBackground(new Color(50, 150, 50));
-        responderButton.addActionListener(new ActionListener() {
+        // Genera una posición inicial aleatoria para el círculo
+        generateRandomCirclePosition();
+        startTime = System.currentTimeMillis(); // Inicia el temporizador al inicio del juego
+
+        // Inicializa el temporizador para verificar la inactividad del usuario
+        timer = new Timer(15000, new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                comprobarRespuesta();
+                showResultDialog(); // Muestra la ventana de resultado si el usuario no hace clic en 15 segundos
             }
         });
-        add(responderButton);
-
-        preguntaActual = 0;
-        respuestasCorrectas = 0;
-        respuestasIncorrectas = 0;
-        respuestasTotales = 0;
-        tiempoTotal = 0;
-        rachaCorrectas = 0;
-        mejorRachaCorrectas = 0;
-        categoriasCorrectas = new int[opcionesRespuestas.length];
-        categoriasIncorrectas = new int[opcionesRespuestas.length];
-
-        mostrarPregunta();
-        setVisible(true);
+        timer.start();
     }
 
-    private void mostrarPregunta() {
-        preguntaLabel.setText(preguntas[preguntaActual]);
-        for (int i = 0; i < opciones.length; i++) {
-            opciones[i].setText(opcionesRespuestas[preguntaActual][i]);
-            opciones[i].setSelected(false);
-        }
+    private boolean isInsideCircle(int x, int y) {
+        int distanceSquared = (x - circleX) * (x - circleX) + (y - circleY) * (y - circleY);
+        return distanceSquared <= circleRadius * circleRadius;
     }
 
-    private void comprobarRespuesta() {
-        long tiempoInicio = System.currentTimeMillis();
+    private void generateRandomCirclePosition() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
 
-        int respuestaSeleccionada = -1;
-        for (int i = 0; i < opciones.length; i++) {
-            if (opciones[i].isSelected()) {
-                respuestaSeleccionada = i;
-                break;
-            }
-        }
-
-        long tiempoFin = System.currentTimeMillis();
-        long tiempoPregunta = tiempoFin - tiempoInicio;
-        tiempoTotal += tiempoPregunta;
-
-        if (respuestaSeleccionada == respuestasCorrectasIndices[preguntaActual]) {
-            respuestasCorrectas++;
-            rachaCorrectas++;
-            mejorRachaCorrectas = Math.max(mejorRachaCorrectas, rachaCorrectas);
-            categoriasCorrectas[preguntaActual]++;
-            JOptionPane.showMessageDialog(this, "¡Respuesta correcta!");
-        } else {
-            respuestasIncorrectas++;
-            rachaCorrectas = 0;
-            categoriasIncorrectas[preguntaActual]++;
-            JOptionPane.showMessageDialog(this, "Respuesta incorrecta. La respuesta correcta es: " +
-                    opcionesRespuestas[preguntaActual][respuestasCorrectasIndices[preguntaActual]]);
-        }
-        preguntaActual++;
-        respuestasTotales++;
-
-        if (preguntaActual < preguntas.length) {
-            mostrarPregunta();
-        } else {
-            mostrarResultados();
-            abrirInterfazInicio();
-            dispose();
-        }
+        // Genera coordenadas aleatorias dentro de toda la pantalla
+        circleX = (int) (Math.random() * (screenWidth - circleRadius * 2)) + circleRadius;
+        circleY = (int) (Math.random() * (screenHeight - circleRadius * 2)) + circleRadius;
     }
 
-    private void mostrarResultados() {
-        StringBuilder resultados = new StringBuilder();
-        resultados.append("Número total de preguntas respondidas: ").append(respuestasTotales).append("\n");
-        resultados.append("Número de respuestas correctas: ").append(respuestasCorrectas).append("\n");
-        resultados.append("Número de respuestas incorrectas: ").append(respuestasIncorrectas).append("\n");
-        double porcentajeCorrectas = (double) respuestasCorrectas / respuestasTotales * 100;
-        resultados.append("Porcentaje de respuestas correctas: ").append(String.format("%.2f", porcentajeCorrectas)).append("%\n");
-        resultados.append("Puntuación total acumulada: ").append(respuestasCorrectas * 10).append("\n");
-        double tiempoPromedio = (double) tiempoTotal / preguntas.length / 1000;
-        resultados.append("Tiempo promedio de respuesta por pregunta: ").append(String.format("%.2f", tiempoPromedio)).append(" segundos\n");
-        resultados.append("Mejor racha de respuestas correctas consecutivas: ").append(mejorRachaCorrectas).append("\n");
-        int categoriaMejorRendimiento = obtenerCategoriaMejorRendimiento();
-        int categoriaPeorRendimiento = obtenerCategoriaPeorRendimiento();
-        resultados.append("Categoría con mejor rendimiento: Pregunta ").append(categoriaMejorRendimiento + 1).append("\n");
-        resultados.append("Categoría con peor rendimiento: Pregunta ").append(categoriaPeorRendimiento + 1).append("\n");
-
-        JOptionPane.showMessageDialog(this, resultados.toString());
+    private String calculateTime() {
+        long currentTime = System.currentTimeMillis();
+        long elapsedTime = (currentTime - startTime) / 1000; // Convertir a segundos
+        long minutes = elapsedTime / 60;
+        long seconds = elapsedTime % 60;
+        return String.format("%02d:%02d", minutes, seconds);
     }
 
-    private int obtenerCategoriaMejorRendimiento() {
-        int maxCorrectas = categoriasCorrectas[0];
-        int categoriaMejorRendimiento = 0;
-        for (int i = 1; i < categoriasCorrectas.length; i++) {
-            if (categoriasCorrectas[i] > maxCorrectas) {
-                maxCorrectas = categoriasCorrectas[i];
-                categoriaMejorRendimiento = i;
-            }
-        }
-        return categoriaMejorRendimiento;
+    private void showResultDialog() {
+        JOptionPane.showMessageDialog(null, "¡Has fallado! Puntuación total: " + score + " - Tiempo transcurrido: " + calculateTime(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+        score = 0; // Reinicia la puntuación
+        startTime = System.currentTimeMillis(); // Reinicia el tiempo
+        generateRandomCirclePosition();
+        repaint();
     }
 
-    private int obtenerCategoriaPeorRendimiento() {
-        int maxIncorrectas = categoriasIncorrectas[0];
-        int categoriaPeorRendimiento = 0;
-        for (int i = 1; i < categoriasIncorrectas.length; i++) {
-            if (categoriasIncorrectas[i] > maxIncorrectas) {
-                maxIncorrectas = categoriasIncorrectas[i];
-                categoriaPeorRendimiento = i;
-            }
-        }
-        return categoriaPeorRendimiento;
-    }
-
-    private void abrirInterfazInicio() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                
-            }
-        });
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.setColor(Color.RED);
+        g.fillOval(circleX - circleRadius, circleY - circleRadius, circleRadius * 2, circleRadius * 2);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new CircleGame();
-            }
+        SwingUtilities.invokeLater(() -> {
+            CircleGame game = new CircleGame();
+            game.setVisible(true);
         });
     }
 }
+
 
