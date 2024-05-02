@@ -130,7 +130,7 @@ public class InicioSesion extends JFrame {
         btnRegistrarse.setForeground(Color.BLACK);
         btnRegistrarse.setBackground(Color.WHITE);
         btnRegistrarse.setFont(new Font("Miriam Libre", Font.BOLD, 12));
-        btnRegistrarse.setPreferredSize(new Dimension(125, 25));
+        btnRegistrarse.setPreferredSize(new Dimension(125, 25)); 
         GridBagConstraints gbc_btnRegistrarse = new GridBagConstraints();
         gbc_btnRegistrarse.insets = new Insets(10, 10, 10, 10);
         gbc_btnRegistrarse.gridx = 0;

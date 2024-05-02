@@ -21,63 +21,7 @@ SET time_zone = "+00:00";
 -- Base de datos: `mydb`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `EstadisticasJuego2`
---
-
-CREATE TABLE `EstadisticasJuego2` (
-  `idEstadisticasJuego2` int NOT NULL,
-  `Puntos` int DEFAULT NULL,
-  `Usuarios_idUsuarios` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `EstadisticasJuego3`
---
-
-CREATE TABLE `EstadisticasJuego3` (
-  `idEstadisticasJuego3` int NOT NULL,
-  `Puntos` int DEFAULT NULL,
-  `Usuarios_idUsuarios` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `EstadisticasPelota`
---
-
-CREATE TABLE `EstadisticasPelota` (
-  `idEstadisticasPelota` int NOT NULL,
-  `Puntos` int DEFAULT NULL,
-  `MaxTiempo` int DEFAULT NULL,
-  `Usuarios_idUsuarios` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Usuarios`
---
-
-CREATE TABLE `Usuarios` (
-  `idUsuarios` int NOT NULL,
-  `nombre` varchar(15) NOT NULL,
-  `primerApellido` varchar(20) NOT NULL,
-  `segundoApellido` varchar(20) NOT NULL,
-  `correoElectronico` varchar(45) NOT NULL,
-  `nombreUsuario` varchar(15) NOT NULL,
-  `contraseña` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Índices para tablas volcadas
---
-
+-- -------------------------------------------------------
 --
 -- Indices de la tabla `EstadisticasJuego2`
 --
@@ -99,40 +43,15 @@ ALTER TABLE `EstadisticasPelota`
   ADD PRIMARY KEY (`idEstadisticasPelota`,`Usuarios_idUsuarios`),
   ADD KEY `fk_EstadisticasPelota_Usuarios_idx` (`Usuarios_idUsuarios`);
 
---
--- Indices de la tabla `Usuarios`
---
-ALTER TABLE `Usuarios`
-  ADD PRIMARY KEY (`idUsuarios`),
-  ADD UNIQUE KEY `nombreUsuario_UNIQUE` (`nombreUsuario`);
 
---
--- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
 -- AUTO_INCREMENT de la tabla `EstadisticasJuego2`
---
-ALTER TABLE `EstadisticasJuego2`
-  MODIFY `idEstadisticasJuego2` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `EstadisticasJuego3`
 --
-ALTER TABLE `EstadisticasJuego3`
-  MODIFY `idEstadisticasJuego3` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `EstadisticasPelota`
---
-ALTER TABLE `EstadisticasPelota`
-  MODIFY `idEstadisticasPelota` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `Usuarios`
---
-ALTER TABLE `Usuarios`
-  MODIFY `idUsuarios` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
