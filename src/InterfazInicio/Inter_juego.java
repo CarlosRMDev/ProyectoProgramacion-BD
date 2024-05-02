@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Juego.AdivinaElNumero;
 import Juego.CircleGame;
 
 import javax.swing.JLabel;
@@ -71,6 +72,19 @@ public class Inter_juego extends JFrame {
 		boton_juego2.setIcon(new ImageIcon("Imagenes/juego2.png"));
 		boton_juego2.setBounds(645, 519, 610, 121);
 		contentPane.add(boton_juego2);
+		boton_juego2.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        // Crear una instancia de CircleGame
+		        AdivinaElNumero adivina = new AdivinaElNumero();
+		        
+		        // Hacer visible la ventana del juego
+		        adivina.setVisible(true);
+		        
+		        // Cerrar la ventana actual si es necesario
+		        dispose(); // Este método cierra la ventana actual donde se encuentra el botón
+		    }
+		});
 		
 		JButton boton_juego1 = new JButton("");
 		boton_juego1.setIcon(new ImageIcon("Imagenes/juego1.png"));
