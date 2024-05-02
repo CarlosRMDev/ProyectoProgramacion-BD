@@ -10,6 +10,7 @@ import Principal.Funciones;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
@@ -202,7 +203,21 @@ public class Registrar extends JFrame {
 		JButton btnRegistro = new JButton("Registrarse");
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Funciones.Registro();
+				if (Funciones.Registro()) {
+					InicioSesion inicio = new InicioSesion();
+					inicio.setVisible(true);
+					dispose();
+				}
+				else {
+					InterfazInicio.Registrar.txtUsuario.setText("");
+					InterfazInicio.Registrar.txtNombre.setText("");
+					InterfazInicio.Registrar.txtApellido1.setText("");
+					InterfazInicio.Registrar.txtApellido2.setText("");
+					InterfazInicio.Registrar.txtCorreo.setText("");
+					InterfazInicio.Registrar.passwordField.setText("");
+					InterfazInicio.Registrar.passwordField_1.setText("");
+					JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+				}
 			}
 		});
 		btnRegistro.setBounds(203, 289, 199, 43);

@@ -14,6 +14,7 @@ import Principal.Funciones;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
@@ -102,7 +103,14 @@ public class InicioSesion extends JFrame {
         JButton btnIniciarSesion = new JButton("Iniciar Sesión");
         btnIniciarSesion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
+        		if (Funciones.InicioSesion()) {
+        			dispose();
+        			Inter_juego juego = new Inter_juego();
+        			juego.setVisible(true);
+        		}
+        		else {
+        			JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecto");
+        		}
         	}
         });
         btnIniciarSesion.setForeground(Color.BLACK); // Color del texto
