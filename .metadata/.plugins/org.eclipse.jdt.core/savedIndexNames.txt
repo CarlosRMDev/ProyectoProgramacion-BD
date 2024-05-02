@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\inknot8x\Documents\GitHub\.metadata\.plugins\org.eclipse.jdt.core
+1865375465.index
+3332504689.index
+1579021800.index

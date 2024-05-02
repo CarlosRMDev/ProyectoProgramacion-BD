@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import InterfazInicio.Inter_juego;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +21,26 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,34 +64,47 @@ public class AdivinaElNumero extends JFrame {
     public AdivinaElNumero() {
         setTitle("Adivina el Número");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Abre la ventana en modo de pantalla completa
-        setUndecorated(true); // Quita los bordes de la ventana para una apariencia más limpia
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setLayout(new BorderLayout());
-        getContentPane().setBackground(new Color(250, 220, 100)); // Fondo de la ventana
+        getContentPane().setBackground(new Color(250, 220, 100));
 
+        JPanel panelTitulo = new JPanel(new GridLayout(3, 1));
+        panelTitulo.setOpaque(false);
+        
         JLabel lblTitulo = new JLabel("¡Adivina el número secreto!");
-        lblTitulo.setFont(new Font("Arial", Font.BOLD, 30));
+        lblTitulo.setFont(new Font("Arial", Font.BOLD, 40));
         lblTitulo.setForeground(Color.RED);
-        add(lblTitulo, BorderLayout.NORTH);
+        lblTitulo.setHorizontalAlignment(JLabel.CENTER);
+        panelTitulo.add(lblTitulo);
 
-        JPanel panelCentral = new JPanel(new BorderLayout());
-        panelCentral.setOpaque(false); // Hace que el panel sea transparente para mostrar el fondo de la ventana
-        panelCentral.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100)); // Agrega un margen al panel
+        JLabel lblBienvenido = new JLabel("!Bienvenido al juego!");
+        lblBienvenido.setFont(new Font("Arial", Font.PLAIN, 30));
+        lblBienvenido.setForeground(Color.BLUE);
+        lblBienvenido.setHorizontalAlignment(JLabel.CENTER);
+        panelTitulo.add(lblBienvenido);
 
         lblIntentos = new JLabel("Intentos: 0");
-        lblIntentos.setFont(new Font("Arial", Font.PLAIN, 20));
-        panelCentral.add(lblIntentos, BorderLayout.NORTH);
+        lblIntentos.setFont(new Font("Arial", Font.PLAIN, 30));
+        lblIntentos.setHorizontalAlignment(JLabel.CENTER);
+        panelTitulo.add(lblIntentos);
+
+        add(panelTitulo, BorderLayout.NORTH);
+
+        JPanel panelCentral = new JPanel(new BorderLayout());
+        panelCentral.setOpaque(false);
+        panelCentral.setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
 
         txtAreaMensajes = new JTextArea();
         txtAreaMensajes.setEditable(false);
         txtAreaMensajes.setFont(new Font("Arial", Font.PLAIN, 20));
         JScrollPane scrollPane = new JScrollPane(txtAreaMensajes);
-        scrollPane.getViewport().setOpaque(false); // Hace que el área de texto sea transparente
-        scrollPane.setOpaque(false); // Hace que el panel del área de desplazamiento sea transparente
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setOpaque(false);
         panelCentral.add(scrollPane, BorderLayout.CENTER);
 
         JPanel panelInferior = new JPanel(new FlowLayout());
-        panelInferior.setOpaque(false); // Hace que el panel sea transparente
+        panelInferior.setOpaque(false);
 
         txtNumero = new JTextField(10);
         txtNumero.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -89,6 +125,27 @@ public class AdivinaElNumero extends JFrame {
 
         add(panelCentral, BorderLayout.CENTER);
 
+        // Botón para volver al menú principal
+        JButton btnMenuPrincipal = new JButton("Menú Principal");
+        btnMenuPrincipal.setFont(new Font("Arial", Font.BOLD, 12));
+        btnMenuPrincipal.addActionListener(new ActionListener() {
+        	 public void actionPerformed(ActionEvent e) {
+ 		        // Crear una instancia de la clase OtroArchivo
+ 		    	Inter_juego inter = new Inter_juego();
+ 		        
+ 		        // Hacer visible la ventana del otro archivo
+ 		        inter.setVisible(true);
+ 		        
+ 		        // Cerrar la ventana actual si es necesario
+ 		        dispose();
+ 		    }
+ 		});
+        
+        JPanel panelBotonMenu = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelBotonMenu.setOpaque(false);
+        panelBotonMenu.add(btnMenuPrincipal);
+        add(panelBotonMenu, BorderLayout.SOUTH);
+
         iniciarJuego();
     }
 
@@ -96,7 +153,7 @@ public class AdivinaElNumero extends JFrame {
         numeroSecreto = (int) (Math.random() * 100) + 1;
         intentos = 0;
         actualizarIntentos();
-        txtAreaMensajes.setText("¡Bienvenido al juego!\nIntenta adivinar el número secreto.");
+        txtAreaMensajes.setText("Intenta adivinar el número secreto.");
     }
 
     private void verificarNumero() {
@@ -136,3 +193,4 @@ public class AdivinaElNumero extends JFrame {
         });
     }
 }
+

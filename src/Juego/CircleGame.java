@@ -1,6 +1,9 @@
 package Juego;
 
 import javax.swing.*;
+
+import InterfazInicio.Inter_juego;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,6 +28,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
 public class CircleGame extends JFrame {
     private int circleX;
     private int circleY;
@@ -32,6 +43,7 @@ public class CircleGame extends JFrame {
     private int score = 0;
     private long startTime;
     private Timer timer;
+    private Timer closeTimer; // Temporizador para cerrar la ventana después de cierto tiempo
 
     public CircleGame() {
         setTitle("Circle Game");
@@ -95,12 +107,23 @@ public class CircleGame extends JFrame {
     }
 
     private void showResultDialog() {
-        JOptionPane.showMessageDialog(null, "¡Has fallado! Puntuación total: " + score + " - Tiempo transcurrido: " + calculateTime(), "Resultado", JOptionPane.INFORMATION_MESSAGE);
+        String message = "¡Has fallado! Puntuación total: " + score + " - Tiempo transcurrido: " + calculateTime();
+        JOptionPane.showMessageDialog(null, message, "Resultado", JOptionPane.INFORMATION_MESSAGE);
         score = 0; // Reinicia la puntuación
         startTime = System.currentTimeMillis(); // Reinicia el tiempo
         generateRandomCirclePosition();
         repaint();
+        
+        // Instancia y muestra la ventana de Inter_juego
+        SwingUtilities.invokeLater(() -> {
+            Inter_juego interJuego = new Inter_juego();
+            interJuego.setVisible(true);
+        });
+        
+        // Cierra la ventana actual
+        dispose();
     }
+
 
     @Override
     public void paint(Graphics g) {
@@ -116,5 +139,6 @@ public class CircleGame extends JFrame {
         });
     }
 }
+
 
 

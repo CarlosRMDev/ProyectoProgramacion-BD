@@ -121,7 +121,7 @@ public class Inter_juego extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("MENÚ DE JUEGOS");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Miriam Libre", Font.PLAIN, 25));
+		lblNewLabel.setFont(new Font("Miriam Libre", Font.PLAIN, 23));
 		lblNewLabel.setForeground(new Color(51, 255, 0));
 		lblNewLabel.setBackground(Color.lightGray);
 		lblNewLabel.setBounds(823, 128, 221, 46);
