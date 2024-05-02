@@ -60,12 +60,12 @@ public class Inter_juego extends JFrame {
 		JButton btnNewButton = new JButton("PERFIL");
 		btnNewButton.setFont(new Font("DejaVu Math TeX Gyre", Font.PLAIN, 11));
 		btnNewButton.setBackground(Color.CYAN);
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Downloads\\icono (1).png"));
+		btnNewButton.setIcon(new ImageIcon("Imagenes/icono (1).png"));
 		btnNewButton.setBounds(1682, 55, 117, 46);
 		contentPane.add(btnNewButton);
 		
 		JButton boton_juego3 = new JButton("");
-		boton_juego3.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Desktop\\juego3 real.png"));
+		boton_juego3.setIcon(new ImageIcon("Imagenes/juego3 real.png"));
 		boton_juego3.setBounds(638, 683, 617, 128);
 		contentPane.add(boton_juego3);
 		boton_juego3.addActionListener((ActionListener) new ActionListener() {
@@ -83,7 +83,7 @@ public class Inter_juego extends JFrame {
 		});
 		
 		JButton boton_juego2 = new JButton("");
-		boton_juego2.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Desktop\\juego2.png"));
+		boton_juego2.setIcon(new ImageIcon("Imagenes/juego2.png"));
 		boton_juego2.setBounds(645, 519, 610, 121);
 		contentPane.add(boton_juego2);
 		boton_juego2.addActionListener((ActionListener) new ActionListener() {
@@ -101,7 +101,7 @@ public class Inter_juego extends JFrame {
 		});
 		
 		JButton boton_juego1 = new JButton("");
-		boton_juego1.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Desktop\\juego1.png"));
+		boton_juego1.setIcon(new ImageIcon("Imagenes/juego1.png"));
 		boton_juego1.setBounds(645, 345, 617, 128);
 		contentPane.add(boton_juego1);
 		boton_juego1.addActionListener((ActionListener) new ActionListener() {
@@ -128,12 +128,12 @@ public class Inter_juego extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Marco");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Downloads\\MARCO INTERFAZ REAL.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon("Imagenes/MARCO INTERFAZ REAL.jpg"));
 		lblNewLabel_1.setBounds(777, 122, 310, 52);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel Label_Fondo = new JLabel("");
-		Label_Fondo.setIcon(new ImageIcon("C:\\Users\\Usuario1\\Downloads\\digital-art-pixel-art-pixels-landscape-nature-couple-1350127-wallhere.com.jpg"));
+		Label_Fondo.setIcon(new ImageIcon("Imagenes/digital-art-pixel-art-pixels-landscape-nature-couple-1350127-wallhere.com.jpg"));
 		Label_Fondo.setBounds(0, 0, 1933, 1064);
 		contentPane.add(Label_Fondo);
 	}
