@@ -5,13 +5,15 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.cj.protocol.Resultset;
+
 import BaseDatos.ConexionMySQL;
 import InterfazInicio.Inter_juego;
 
 public class Funciones {
 	//Funcion para añadir un usuario a la base
 	
-	public static void Registro () {
+	public static boolean Registro () {
 		//Primero recogemos todos los fieldtxt del frame registrar para obtener los datos de usuario
 		String nombre = InterfazInicio.Registrar.txtNombre.getText();
 		String apellido1 = InterfazInicio.Registrar.txtApellido1.getText();
@@ -30,28 +32,45 @@ public class Funciones {
 			String sentencia = "SELECT * FROM Usuarios";
 			ResultSet datos;
 			datos = conexion.ejecutarSelect(sentencia);
-				while (datos.next()) {	
-					//Este principalmente funciona bien, si el nombre de usuario ya está usado o la contraseña no coincide, da error
-					if (datos.getString("nombreUsuario").equals(usuario) || !contrasena.equals(confContra)) {
-						InterfazInicio.Registrar.txtUsuario.setText("");
-						InterfazInicio.Registrar.txtNombre.setText("");
-						InterfazInicio.Registrar.txtApellido1.setText("");
-						InterfazInicio.Registrar.txtApellido2.setText("");
-						InterfazInicio.Registrar.txtCorreo.setText("");
-						InterfazInicio.Registrar.passwordField.setText("");
-						InterfazInicio.Registrar.passwordField_1.setText("");
-						
-						JOptionPane.showMessageDialog(null, "Nombre o contraseña incorrectos");
-					}
-					else {
-						String insertar = "INSERT INTO Usuarios (nombre, primerApellido, segundoApellido, correoElectronico, nombreUsuario, contraseña)"
-								+ " VALUES ('" + nombre + "', '" + apellido1 + "', '" + apellido2 + "', '" + correo + "', '" + usuario + "', '"
-								+ contrasena + "')";
-						conexion.ejecutarInsertDeleteUpdate(insertar);
-						JOptionPane.showMessageDialog(null, "Registrado correctamente");
-						System.out.println("Insertado correctamente");
-					}
+			
+			//Controlamos la entrada de 2 contraseñas correctas y si es así, entramos a recorrer el nombre de usuario
+			boolean entra = true;
+			boolean existeUsuario = false;
+			
+			if (contrasena != confContra) {
+				entra = false;
+			}
+			else {
+				InterfazInicio.Registrar.passwordField.setText("");
+				InterfazInicio.Registrar.passwordField_1.setText("");
+				JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+				return false;
+			}
+			//Ahora si entramos en nuestra base de datos y miramos usuario por usuario si se repite el nombre de usuario
+			while (entra && datos.next()) {
+				if (datos.getString("nombreUsuario").equals(usuario)) {
+					existeUsuario = true;
+					InterfazInicio.Registrar.txtUsuario.setText("");
+					JOptionPane.showMessageDialog(null, "Nombre de Usuario existente");
+					return false;
 				}
+				else {
+					existeUsuario = false;
+				}
+			}
+			
+			if (!existeUsuario) {
+				String insertar = "INSERT INTO Usuarios (nombre, primerApellido, segundoApellido, correoElectronico, nombreUsuario, contraseña)"
+						+ " VALUES ('" + nombre + "', '" + apellido1 + "', '" + apellido2 + "', '" + correo + "', '" + usuario + "', '"
+						+ contrasena + "')";
+				conexion.ejecutarInsertDeleteUpdate(insertar);
+				JOptionPane.showMessageDialog(null, "Registrado correctamente");
+				System.out.println("Insertado correctamente");
+				return true;
+			}
+			else {
+				return false;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,45 +83,38 @@ public class Funciones {
 				e.printStackTrace();
 			}
 		}
+		return false;
 	}
-	public static void InicioSesion() {
+	public static boolean InicioSesion() {
 		String usuario = InterfazInicio.InicioSesion.textFieldUsuario.getText();
 		char[] pass	= InterfazInicio.InicioSesion.passwordField.getPassword();
 		//pasamos la contraseña a string
-		String contrasena = new String (pass); 
-		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		String contrasena = new String(pass); 
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");	
+		
+		System.out.println("Establece conexión");
 		
 		try {
 			conexion.conectar();
-			String sentencia = "SELECT nombreUsuario FROM Usuarios WHERE nombreUsuario = '" + usuario + "'";
-			String sentenciaPass = "SELECT contraseña FROM Usuarios WHERE nombreUsuario = '" + usuario + "'";
-			
-			ResultSet datos = conexion.ejecutarSelect(sentencia);
-			ResultSet comprobar = conexion.ejecutarSelect(sentenciaPass);
-			
-			while(datos.next()) {
-				if (comprobar.getString(1).equals(contrasena)) {
-					System.out.println("Iniciado correctamente");
-					Inter_juego intjuego = new Inter_juego();
-					intjuego.setVisible(true);					
+			String sentenciaPass = "SELECT * FROM Usuarios WHERE nombreUsuario = '" + usuario + "';";
+			ResultSet contras;
+			contras = conexion.ejecutarSelect(sentenciaPass);
+			System.out.println(sentenciaPass);
+			//primero comprobaremos que exista el usuario
+			while(contras.next()) {
+				System.out.println(contras.getString("nombreUsuario"));
+				if (contrasena.equals(contras.getString("contraseña"))){
+					System.out.println("contraseña correcta" + contras.getString("contraseña"));
+					
+					return true;
 				}
+				else {
+					System.out.println("contraseña incorrecta");
+					return false;
+				}
+				
 			}
 			
-			/*while(datos.next()) {
-				if (datos.getString("nombreUsuario").toLowerCase() == usuario.toLowerCase()) {
-					String comprobarPass = "SELECT contraseña FROM Usuarios WHERE nombreUsuario = '" + usuario + "'";
-					ResultSet comprobar = conexion.ejecutarSelect(comprobarPass);
-					if (comprobar.getString("contraseña") == contrasena) {
-						JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
-						Inter_juego intjuegos = new Inter_juego();
-						intjuegos.setVisible(true);
-					}
-					else {
-						JOptionPane.showMessageDialog(null, "Contraseña incorrecta, inténtelo de nuevo");
-					}
-				}
-			}*/
-			//JOptionPane.showMessageDialog(null, "Usuario no encontrado");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -116,6 +128,7 @@ public class Funciones {
 				e.printStackTrace();
 			}
 		}
+		return false;
 	}
 }
 	
