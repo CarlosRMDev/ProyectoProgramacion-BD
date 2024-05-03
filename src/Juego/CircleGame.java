@@ -113,16 +113,22 @@ public class CircleGame extends JFrame {
         startTime = System.currentTimeMillis(); // Reinicia el tiempo
         generateRandomCirclePosition();
         repaint();
-        
-        // Instancia y muestra la ventana de Inter_juego
-        SwingUtilities.invokeLater(() -> {
-            Inter_juego interJuego = new Inter_juego();
-            interJuego.setVisible(true);
-        });
-        
-        // Cierra la ventana actual
-        dispose();
+       
+        class Abrirque {
+            public static void main(String[] args) {
+                // Instancia y muestra la ventana de Inter_juego
+                SwingUtilities.invokeLater(() -> {
+                    Inter_juego inter = new Inter_juego();
+                    inter.setVisible(true);
+                    
+                });
+                
+            }
+            
+        }
     }
+     
+    
 
 
     @Override
