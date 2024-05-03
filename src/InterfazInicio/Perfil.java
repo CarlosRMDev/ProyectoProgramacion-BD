@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class Perfil extends JFrame {
 
@@ -49,7 +50,7 @@ public class Perfil extends JFrame {
 		this.setBackground(Color.white);
 		
 		//Nombre Usuario
-		JButton btnNewButton = new JButton(InicioSesion.textFieldUsuario.getText().toUpperCase());
+		JButton btnNewButton = new JButton("Hola");//InicioSesion.textFieldUsuario.getText().toUpperCase()
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -66,18 +67,45 @@ public class Perfil extends JFrame {
 		panel.setBackground(new Color(0, 0, 0));
 		panel.setBounds(267, 267, 354, 611);
 		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel AimBot = new JLabel("AimBot Ball");
+		AimBot.setForeground(Color.WHITE);
+		AimBot.setFont(new Font("Arial Black", Font.PLAIN, 31));
+		AimBot.setHorizontalAlignment(SwingConstants.CENTER);
+		AimBot.setBackground(Color.WHITE);
+		AimBot.setBounds(70, 43, 214, 38);
+		panel.add(AimBot);
 		
 		//DATOS JUEGO 2
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 0, 0));
 		panel_1.setBounds(811, 267, 354, 611);
 		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel B00M = new JLabel("B00M");
+		B00M.setHorizontalAlignment(SwingConstants.CENTER);
+		B00M.setForeground(Color.WHITE);
+		B00M.setFont(new Font("Arial Black", Font.PLAIN, 31));
+		B00M.setBackground(Color.WHITE);
+		B00M.setBounds(70, 43, 214, 38);
+		panel_1.add(B00M);
 		
 		//DATOS JUEGO 3
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(0, 0, 0));
 		panel_2.setBounds(1355, 267, 354, 611);
 		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel AcTrivial = new JLabel("AcTrivial");
+		AcTrivial.setBounds(70, 43, 214, 38);
+		AcTrivial.setHorizontalAlignment(SwingConstants.CENTER);
+		AcTrivial.setForeground(Color.WHITE);
+		AcTrivial.setFont(new Font("Arial Black", Font.PLAIN, 31));
+		AcTrivial.setBackground(Color.WHITE);
+		panel_2.add(AcTrivial);
 		
 		//FONDO
 		JLabel Fondo = new JLabel("");
