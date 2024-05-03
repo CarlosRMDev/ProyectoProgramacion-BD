@@ -9,7 +9,7 @@ public class Main {
 		
 		InicioSesion inicio = new InicioSesion();
 		inicio.setVisible(true);
-
+		
 	}
 
 }
