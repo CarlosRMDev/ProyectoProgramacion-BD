@@ -76,7 +76,7 @@ public class CircleGame extends JFrame {
         startTime = System.currentTimeMillis(); // Inicia el temporizador al inicio del juego
 
         // Inicializa el temporizador para verificar la inactividad del usuario
-        timer = new Timer(15000, new ActionListener() {
+        timer = new Timer(15000000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 showResultDialog(); // Muestra la ventana de resultado si el usuario no hace clic en 15 segundos

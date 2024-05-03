@@ -57,10 +57,18 @@ public class Inter_juego extends JFrame {
 		contentPane.setLayout(null);
 		this.setBackground(Color.white);
 		
-		JButton btnNewButton = new JButton(InicioSesion.textFieldUsuario.getText().toUpperCase());
+		JButton btnNewButton = 
+		new JButton(InicioSesion.textFieldUsuario.getText().toUpperCase());
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				// Crear una instancia de la clase OtroArchivo
+		    	Perfil perf = new Perfil();
+		        
+		        // Hacer visible la ventana del otro archivo
+		        perf.setVisible(true);
+		        
+		        // Cerrar la ventana actual si es necesario
+		        dispose();
 			}
 		});
 		btnNewButton.setFont(new Font("DejaVu Math TeX Gyre", Font.PLAIN, 11));
@@ -68,6 +76,7 @@ public class Inter_juego extends JFrame {
 		btnNewButton.setIcon(new ImageIcon("Imagenes/icono (1).png"));
 		btnNewButton.setBounds(1620, 55, 199, 46);
 		contentPane.add(btnNewButton);
+	
 		
 		JButton boton_juego3 = new JButton("");
 		boton_juego3.setIcon(new ImageIcon("Imagenes/juego3 real.png"));
@@ -85,6 +94,7 @@ public class Inter_juego extends JFrame {
 		        // Cerrar la ventana actual si es necesario
 		        dispose();
 		    }
+		    
 		});
 		
 		JButton boton_juego2 = new JButton("");

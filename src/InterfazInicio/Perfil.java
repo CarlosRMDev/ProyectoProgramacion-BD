@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Juego.PreguntasYRespuestas;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
@@ -53,7 +56,14 @@ public class Perfil extends JFrame {
 		JButton btnNewButton = new JButton("Hola");//InicioSesion.textFieldUsuario.getText().toUpperCase()
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				// Crear una instancia de la clase OtroArchivo
+		    	Inter_juego inter = new Inter_juego();
+		        
+		        // Hacer visible la ventana del otro archivo
+		        inter.setVisible(true);
+		        
+		        // Cerrar la ventana actual si es necesario
+		        dispose();
 			}
 		});
 		btnNewButton.setFont(new Font("DejaVu Math TeX Gyre", Font.PLAIN, 11));
