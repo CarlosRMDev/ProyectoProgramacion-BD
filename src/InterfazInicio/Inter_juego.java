@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import java.awt.Button;
 import javax.swing.JButton;
+import java.awt.Frame;
 
 public class Inter_juego extends JFrame {
 
@@ -50,6 +51,7 @@ public class Inter_juego extends JFrame {
 	public Inter_juego() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

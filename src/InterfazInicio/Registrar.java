@@ -203,7 +203,11 @@ public class Registrar extends JFrame {
 		JButton btnRegistro = new JButton("Registrarse");
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				if (Funciones.Registro()) {
+					Funciones.CrearStatsAim();
+					Funciones.CrearStatsNum();
+					Funciones.CrearStatsTri();
 					InicioSesion inicio = new InicioSesion();
 					inicio.setVisible(true);
 					dispose();

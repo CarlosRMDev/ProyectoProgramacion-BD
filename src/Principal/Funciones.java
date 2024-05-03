@@ -9,6 +9,7 @@ import com.mysql.cj.protocol.Resultset;
 
 import BaseDatos.ConexionMySQL;
 import InterfazInicio.Inter_juego;
+import InterfazInicio.Registrar;
 
 public class Funciones {
 	//Funcion para añadir un usuario a la base
@@ -66,6 +67,8 @@ public class Funciones {
 				conexion.ejecutarInsertDeleteUpdate(insertar);
 				JOptionPane.showMessageDialog(null, "Registrado correctamente");
 				System.out.println("Insertado correctamente");
+				
+				
 				return true;
 			}
 			else {
@@ -131,20 +134,25 @@ public class Funciones {
 		return false;
 	}
 	
-	public static ResultSet SelectCirculo() {
+	/*
+	 * Creación de los métodos para la entrada de estadísticas en los 3 juegos
+	 */
+	
+	public static void CrearStatsAim() {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
-		
 		try {
 			conexion.conectar();
 			
-			String sentencia = "SELECT e.PuntosMax, e.MaxTiempo, e.UltimaPuntuacion, e.NumPartidas" +
-					" FROM AimBot e" + 
-					" INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios" +
-					"WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText() + "';";
+			String selectID = "SELECT * FROM Usuarios WHERE nombreUsuario = '" + InterfazInicio.Registrar.txtUsuario.getText()+ "'";
+			ResultSet RDatos;
+			RDatos = conexion.ejecutarSelect(selectID);
 			
-			ResultSet datos;
-			datos = conexion.ejecutarSelect(sentencia);
-			return datos;
+			while (RDatos.next()) {
+				System.out.println(RDatos.getInt("idUsuarios"));
+				String sentencia = "INSERT INTO AimBot(Usuarios_idUsuarios) VALUES (" + RDatos.getInt("idUsuarios") + ");";
+				conexion.ejecutarInsertDeleteUpdate(sentencia);
+			}
+			
 			
 			
 		} catch (SQLException e) {
@@ -159,10 +167,69 @@ public class Funciones {
 				e.printStackTrace();
 			}
 		}
-		return null;
 	}
 	
-	public static void UpdateCirculo() {
+	public static void CrearStatsNum() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			
+			String selectID = "SELECT * FROM Usuarios WHERE nombreUsuario = '" + InterfazInicio.Registrar.txtUsuario.getText()+ "'";
+			ResultSet RDatos;
+			RDatos = conexion.ejecutarSelect(selectID);
+			
+			while (RDatos.next()) {
+				System.out.println(RDatos.getInt("idUsuarios"));
+				String sentencia = "INSERT INTO Boom (Usuarios_idUsuarios) VALUES (" + RDatos.getInt("idUsuarios") + ");";
+				conexion.ejecutarInsertDeleteUpdate(sentencia);
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static void CrearStatsTri() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			
+			String selectID = "SELECT * FROM Usuarios WHERE nombreUsuario = '" + InterfazInicio.Registrar.txtUsuario.getText()+ "'";
+			ResultSet RDatos;
+			RDatos = conexion.ejecutarSelect(selectID);
+			
+			while (RDatos.next()) {
+				System.out.println(RDatos.getInt("idUsuarios"));
+				String sentencia = "INSERT INTO AcTrivial (Usuarios_idUsuarios) VALUES (" + RDatos.getInt("idUsuarios") + ");";
+				conexion.ejecutarInsertDeleteUpdate(sentencia);
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	/*
+	 * MÉTODOS PARA RECOPILAR DATOS EN EL JUEGO DEL CÍRCULO
+	 */
+	public static void ContadorPartidas() {
 				/*UPDATE Estadísticas e
 		INNER JOIN Usuarios u ON e.idUsuario = u.idUsuario
 		SET e.estadistica1 = 'nuevo_valor'
@@ -170,9 +237,8 @@ public class Funciones {
 		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
 		try {
 			conexion.conectar();
-			ResultSet datos;
-			String sentencia = "INNER JOIN Usuarios u ON e.idUsuario = u.idUsuario SET e.estadistica1 = 'nuevoValor' WHERE u.nombreUsuario = 'usuario';";
-			
+			String sentencia = "UPDATE AimBot e	INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios SET e.NumPartidas = (NumPartidas+1)WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"'";
+			conexion.ejecutarInsertDeleteUpdate(sentencia);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
