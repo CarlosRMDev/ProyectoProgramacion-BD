@@ -7,6 +7,8 @@ import InterfazInicio.Inter_juego;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -80,7 +82,7 @@ public class CircleGame extends JFrame {
                 showResultDialog(); // Muestra la ventana de resultado si el usuario no hace clic en 15 segundos
             }
         });
-        timer.start();
+        
     }
 
     private boolean isInsideCircle(int x, int y) {
@@ -109,24 +111,16 @@ public class CircleGame extends JFrame {
     private void showResultDialog() {
         String message = "¡Has fallado! Puntuación total: " + score + " - Tiempo transcurrido: " + calculateTime();
         JOptionPane.showMessageDialog(null, message, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-        score = 0; // Reinicia la puntuación
-        startTime = System.currentTimeMillis(); // Reinicia el tiempo
-        generateRandomCirclePosition();
-        repaint();
-       
-        class Abrirque {
-            public static void main(String[] args) {
-                // Instancia y muestra la ventana de Inter_juego
-                SwingUtilities.invokeLater(() -> {
-                    Inter_juego inter = new Inter_juego();
-                    inter.setVisible(true);
-                    
-                });
-                
-            }
-            
-        }
+     // Crear una instancia de la clase OtroArchivo
+    	Inter_juego inter = new Inter_juego();
+        
+        // Hacer visible la ventana del otro archivo
+        inter.setVisible(true);
+        
+        // Cerrar la ventana actual si es necesario
+        dispose();    
     }
+
      
     
 
@@ -138,12 +132,7 @@ public class CircleGame extends JFrame {
         g.fillOval(circleX - circleRadius, circleY - circleRadius, circleRadius * 2, circleRadius * 2);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            CircleGame game = new CircleGame();
-            game.setVisible(true);
-        });
-    }
+ 
 }
 
 
