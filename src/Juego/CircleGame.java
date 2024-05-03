@@ -68,6 +68,7 @@ public class CircleGame extends JFrame {
                     //Funcion de recogida de datos
                     //Parar timer
                     Funciones.ContadorPartidas();
+                    Funciones.PuntosMax(score);
                 }
 
                 generateRandomCirclePosition();
