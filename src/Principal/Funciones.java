@@ -130,5 +130,61 @@ public class Funciones {
 		}
 		return false;
 	}
+	
+	public static ResultSet SelectCirculo() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			
+			String sentencia = "SELECT e.PuntosMax, e.MaxTiempo, e.UltimaPuntuacion, e.NumPartidas" +
+					" FROM AimBot e" + 
+					" INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios" +
+					"WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText() + "';";
+			
+			ResultSet datos;
+			datos = conexion.ejecutarSelect(sentencia);
+			return datos;
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public static void UpdateCirculo() {
+				/*UPDATE Estadísticas e
+		INNER JOIN Usuarios u ON e.idUsuario = u.idUsuario
+		SET e.estadistica1 = 'nuevo_valor'
+		WHERE u.nombreUsuario = 'usuario123';*/
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			ResultSet datos;
+			String sentencia = "INNER JOIN Usuarios u ON e.idUsuario = u.idUsuario SET e.estadistica1 = 'nuevoValor' WHERE u.nombreUsuario = 'usuario';";
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }
 	
