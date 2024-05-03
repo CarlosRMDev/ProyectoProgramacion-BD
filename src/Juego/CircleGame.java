@@ -64,6 +64,8 @@ public class CircleGame extends JFrame {
                     timer.restart(); // Reinicia el temporizador si el usuario hace clic
                 } else {
                     showResultDialog(); // Muestra la ventana de resultado si el usuario falla
+                    //Funcion de recogida de datos
+                    //Parar timer
                 }
 
                 generateRandomCirclePosition();
