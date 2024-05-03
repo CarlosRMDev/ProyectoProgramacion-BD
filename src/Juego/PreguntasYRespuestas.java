@@ -172,6 +172,13 @@ public class PreguntasYRespuestas extends JFrame {
 
     private void abrirInterJuego() {
         SwingUtilities.invokeLater(() -> new Inter_juego());
+        Inter_juego inter = new Inter_juego();
+        
+        // Hacer visible la ventana del otro archivo
+        inter.setVisible(true);
+        
+        // Cerrar la ventana actual si es necesario
+        dispose();
     }
 
     private int obtenerCategoriaMejorRendimiento() {
