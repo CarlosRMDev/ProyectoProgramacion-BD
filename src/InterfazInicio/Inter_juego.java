@@ -57,11 +57,16 @@ public class Inter_juego extends JFrame {
 		contentPane.setLayout(null);
 		this.setBackground(Color.white);
 		
-		JButton btnNewButton = new JButton("PERFIL");
+		JButton btnNewButton = new JButton(InicioSesion.textFieldUsuario.getText().toUpperCase());
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnNewButton.setFont(new Font("DejaVu Math TeX Gyre", Font.PLAIN, 11));
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setIcon(new ImageIcon("Imagenes/icono (1).png"));
-		btnNewButton.setBounds(1682, 55, 117, 46);
+		btnNewButton.setBounds(1620, 55, 199, 46);
 		contentPane.add(btnNewButton);
 		
 		JButton boton_juego3 = new JButton("");
