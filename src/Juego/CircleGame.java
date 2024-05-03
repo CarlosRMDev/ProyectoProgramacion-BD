@@ -60,7 +60,7 @@ public class CircleGame extends JFrame {
                 int mouseY = e.getY();
 
                 if (isInsideCircle(mouseX, mouseY)) {
-                    score++;
+                    score += 5;
                     timer.restart(); // Reinicia el temporizador si el usuario hace clic
                 } else {
                     showResultDialog(); // Muestra la ventana de resultado si el usuario falla
