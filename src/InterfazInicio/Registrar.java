@@ -19,6 +19,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.TextField;
 
 public class Registrar extends JFrame {
 
@@ -65,42 +67,49 @@ public class Registrar extends JFrame {
 		//Primero creamos todos los label, son las etiquetas con los nombres de los campos para el registro. 
 		
 		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setFont(new Font("Georgia", Font.PLAIN, 11));
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre.setForeground(Color.GREEN);
 		lblNombre.setBounds(134, 99, 126, 14);
 		contentPane.add(lblNombre);
 		
 		JLabel lblApellido1 = new JLabel("Primer Apellido");
+		lblApellido1.setFont(new Font("Georgia", Font.PLAIN, 11));
 		lblApellido1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApellido1.setForeground(Color.GREEN);
 		lblApellido1.setBounds(134, 124, 126, 14);
 		contentPane.add(lblApellido1);
 		
 		JLabel lblApellido2 = new JLabel("Segundo Apellido");
+		lblApellido2.setFont(new Font("Georgia", Font.PLAIN, 11));
 		lblApellido2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApellido2.setForeground(Color.GREEN);
 		lblApellido2.setBounds(134, 149, 126, 14);
 		contentPane.add(lblApellido2);
 		
 		JLabel lblUsuario = new JLabel("Nombre de Usuario");
+		lblUsuario.setFont(new Font("Georgia", Font.PLAIN, 11));
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuario.setForeground(Color.GREEN);
 		lblUsuario.setBounds(134, 174, 126, 14);
 		contentPane.add(lblUsuario);
 		
 		JLabel lblContrasena = new JLabel("Contraseña");
+		lblContrasena.setFont(new Font("Georgia", Font.PLAIN, 11));
 		lblContrasena.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContrasena.setForeground(Color.GREEN);
 		lblContrasena.setBounds(134, 199, 126, 14);
 		contentPane.add(lblContrasena);
 		
 		JLabel lblConfContr = new JLabel("Confirmar contraseña");
+		lblConfContr.setFont(new Font("Georgia", Font.PLAIN, 11));
 		lblConfContr.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConfContr.setForeground(Color.GREEN);
-		lblConfContr.setBounds(134, 224, 126, 14);
+		lblConfContr.setBounds(134, 224, 142, 14);
 		contentPane.add(lblConfContr);
 		
 		JLabel lblCorreo = new JLabel("Correo");
+		lblCorreo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		lblCorreo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCorreo.setForeground(Color.GREEN);
 		lblCorreo.setBounds(134, 249, 126, 14);
@@ -201,6 +210,7 @@ public class Registrar extends JFrame {
 		contentPane.add(passwordField_1);
 		
 		JButton btnRegistro = new JButton("Registrarse");
+		btnRegistro.setFont(new Font("Segoe UI Black", Font.PLAIN, 11));
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -226,5 +236,13 @@ public class Registrar extends JFrame {
 		});
 		btnRegistro.setBounds(203, 289, 199, 43);
 		contentPane.add(btnRegistro);
+		
+		JLabel lblRegistro = new JLabel("REGISTRO");
+		lblRegistro.setBackground(Color.BLACK);
+		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegistro.setForeground(Color.GREEN);
+		lblRegistro.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
+		lblRegistro.setBounds(232, 24, 126, 14);
+		contentPane.add(lblRegistro);
 	}
 }
