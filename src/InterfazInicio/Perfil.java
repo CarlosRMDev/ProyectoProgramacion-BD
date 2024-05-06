@@ -70,7 +70,7 @@ public class Perfil extends JFrame {
 		btnNewButton.setFont(new Font("DejaVu Math TeX Gyre", Font.PLAIN, 11));
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setIcon(new ImageIcon("Imagenes/icono (1).png"));
-		btnNewButton.setBounds(1629, 65, 199, 46);
+		btnNewButton.setBounds(500, 55, 199, 46);
 		contentPane.add(btnNewButton);
 		
 		//DATOS JUEGO 2
@@ -160,7 +160,22 @@ public class Perfil extends JFrame {
 					lblPuntosMax.setBounds(50, 131, 275, 30);
 					panel.add(lblPuntosMax);
 					
-					
+					//Para poner BRONCE / PLATA / ORO
+					/*
+					 * Podemos hacer un if utilizando el dato que recogemos de la base de datos para introducir
+					 * tres label en la misma posición delante de la puntuación máxima, hacerlos set visible false
+					 * y con los if, else if manejamos cuando aparece uno u otro, y hacemos un ranking de divisiones
+					 * Lo hacemos sólo en el del círculo porque no hay más tiempo
+					 * 
+					 * if (Funciones.SelectContador() <= 95){
+					 * noseque.setVisible(true);
+					 * }
+					 * else if (Funciones.SelectContador() > 95 && Funciones.SelectContador() < 250{
+					 * noseque2.setVisible(true);
+					 * noseque.setVisible(false);
+					 * 
+					 * }
+					 */
 								
 					// Label Número de Partidas
 					JLabel lblNumPartidas = new JLabel("Número de Partidas: " + Funciones.SelectContador());
