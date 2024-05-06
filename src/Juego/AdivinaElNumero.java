@@ -13,6 +13,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import InterfazInicio.Inter_juego;
+import Principal.Funciones;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -168,6 +169,8 @@ public class AdivinaElNumero extends JFrame {
                     txtAreaMensajes.append("\n¡Felicidades! ¡Has adivinado el número secreto!");
                     txtAreaMensajes.append("\nEl número secreto era: " + numeroSecreto + ".");
                     txtNumero.setEnabled(false);
+                    Funciones.ContadorPartidas1();
+                    Funciones.RecordIntentos(intentos);
                 } else if (numero < numeroSecreto) {
                     txtAreaMensajes.append("\nEl número secreto es mayor que " + numero + ".");
                 } else {

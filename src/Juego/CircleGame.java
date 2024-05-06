@@ -3,6 +3,7 @@ package Juego;
 import javax.swing.*;
 
 import InterfazInicio.Inter_juego;
+import Principal.Funciones;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -66,6 +67,8 @@ public class CircleGame extends JFrame {
                     showResultDialog(); // Muestra la ventana de resultado si el usuario falla
                     //Funcion de recogida de datos
                     //Parar timer
+                    Funciones.ContadorPartidas();
+                    Funciones.PuntosMax(score);
                 }
 
                 generateRandomCirclePosition();

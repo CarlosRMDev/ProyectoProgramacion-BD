@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Juego.PreguntasYRespuestas;
+import Principal.Funciones;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -69,7 +70,7 @@ public class Perfil extends JFrame {
 		btnNewButton.setFont(new Font("DejaVu Math TeX Gyre", Font.PLAIN, 11));
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setIcon(new ImageIcon("Imagenes/icono (1).png"));
-		btnNewButton.setBounds(1620, 55, 199, 46);
+		btnNewButton.setBounds(1629, 65, 199, 46);
 		contentPane.add(btnNewButton);
 		
 		//DATOS JUEGO 2
@@ -87,19 +88,19 @@ public class Perfil extends JFrame {
 		B00M.setBounds(70, 43, 214, 38);
 		panel_1.add(B00M);
 		
-		JLabel lblRecordIntentos = new JLabel("Record Intentos:");
+		JLabel lblRecordIntentos = new JLabel("Record Intentos: " + Funciones.SelectRecordIntentos());
 		lblRecordIntentos.setForeground(Color.WHITE);
 		lblRecordIntentos.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblRecordIntentos.setBounds(36, 129, 275, 30);
 		panel_1.add(lblRecordIntentos);
 		
-		JLabel lblPartidasJugadas = new JLabel("Partidas Jugadas:");
+		JLabel lblPartidasJugadas = new JLabel("Partidas Jugadas: " + Funciones.SelectContador1());
 		lblPartidasJugadas.setForeground(Color.WHITE);
 		lblPartidasJugadas.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblPartidasJugadas.setBounds(36, 247, 275, 30);
 		panel_1.add(lblPartidasJugadas);
 		
-		JLabel lblUltimaPuntuacion_1 = new JLabel("Última Puntuación:");
+		JLabel lblUltimaPuntuacion_1 = new JLabel("Última Puntuación: " + Funciones.SelectUltIntentos());
 		lblUltimaPuntuacion_1.setForeground(Color.WHITE);
 		lblUltimaPuntuacion_1.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblUltimaPuntuacion_1.setBounds(36, 365, 275, 30);
@@ -120,23 +121,17 @@ public class Perfil extends JFrame {
 		AcTrivial.setBackground(Color.WHITE);
 		panel_2.add(AcTrivial);
 		
-		JLabel lblNotaMxima = new JLabel("Nota Máxima:");
+		JLabel lblNotaMxima = new JLabel("Nota Máxima: " + Funciones.SelectNotaMaxima());
 		lblNotaMxima.setForeground(Color.WHITE);
 		lblNotaMxima.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNotaMxima.setBounds(35, 128, 275, 30);
 		panel_2.add(lblNotaMxima);
 		
-		JLabel lblNmeroDeIntentos = new JLabel("Número de intentos:");
+		JLabel lblNmeroDeIntentos = new JLabel("Número de intentos: " + Funciones.SelectContador2());
 		lblNmeroDeIntentos.setForeground(Color.WHITE);
 		lblNmeroDeIntentos.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblNmeroDeIntentos.setBounds(35, 246, 275, 30);
 		panel_2.add(lblNmeroDeIntentos);
-		
-		JLabel lblUltimaPuntuacion_1_1 = new JLabel("Tiempo de nota máxima:");
-		lblUltimaPuntuacion_1_1.setForeground(Color.WHITE);
-		lblUltimaPuntuacion_1_1.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblUltimaPuntuacion_1_1.setBounds(35, 364, 275, 30);
-		panel_2.add(lblUltimaPuntuacion_1_1);
 		
 		// DATOS JUEGO 1 - AimBot Ball
 		JPanel panelz = new JPanel();
@@ -159,32 +154,27 @@ public class Perfil extends JFrame {
 					panel.add(AimBot);
 						
 					// Label Puntos Máximos
-					JLabel lblPuntosMax = new JLabel("Puntos Máximos:");
+					JLabel lblPuntosMax = new JLabel("Puntos Máximos: " + Funciones.SelectPuntosMax());
 					lblPuntosMax.setForeground(Color.WHITE);
 					lblPuntosMax.setFont(new Font("Arial", Font.PLAIN, 18));
 					lblPuntosMax.setBounds(50, 131, 275, 30);
 					panel.add(lblPuntosMax);
+					
+					
 								
 					// Label Número de Partidas
-					JLabel lblNumPartidas = new JLabel("Número de Partidas:");
+					JLabel lblNumPartidas = new JLabel("Número de Partidas: " + Funciones.SelectContador());
 					lblNumPartidas.setForeground(Color.WHITE);
 					lblNumPartidas.setFont(new Font("Arial", Font.PLAIN, 18));
-					lblNumPartidas.setBounds(50, 485, 275, 30);
+					lblNumPartidas.setBounds(50, 367, 275, 30);
 					panel.add(lblNumPartidas);
 					
 					// Label Última Puntuación
-					JLabel lblUltimaPuntuacion = new JLabel("Última Puntuación:");
+					JLabel lblUltimaPuntuacion = new JLabel("Última Puntuación: " + Funciones.SelectUltPunt());
 					lblUltimaPuntuacion.setForeground(Color.WHITE);
 					lblUltimaPuntuacion.setFont(new Font("Arial", Font.PLAIN, 18));
-					lblUltimaPuntuacion.setBounds(50, 367, 275, 30);
+					lblUltimaPuntuacion.setBounds(50, 249, 275, 30);
 					panel.add(lblUltimaPuntuacion);
-												
-					// Label Max Tiempo
-					JLabel lblMaxTiempo = new JLabel("Max Tiempo:");
-					lblMaxTiempo.setForeground(Color.WHITE);
-					lblMaxTiempo.setFont(new Font("Arial", Font.PLAIN, 18));
-					lblMaxTiempo.setBounds(50, 249, 275, 30);
-					panel.add(lblMaxTiempo);
 					contentPane.add(panel);
 														
 					//FONDO

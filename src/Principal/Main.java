@@ -1,5 +1,8 @@
 package Principal;
 
+import java.sql.SQLException;
+
+import BaseDatos.ConexionMySQL;
 import InterfazInicio.InicioSesion;
 
 public class Main {
@@ -9,7 +12,6 @@ public class Main {
 		
 		InicioSesion inicio = new InicioSesion();
 		inicio.setVisible(true);
-		
 	}
 
 }

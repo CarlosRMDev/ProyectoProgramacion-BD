@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import java.awt.Button;
 import javax.swing.JButton;
+import java.awt.Frame;
 
 public class Inter_juego extends JFrame {
 
@@ -50,6 +51,7 @@ public class Inter_juego extends JFrame {
 	public Inter_juego() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -74,7 +76,7 @@ public class Inter_juego extends JFrame {
 		btnNewButton.setFont(new Font("DejaVu Math TeX Gyre", Font.PLAIN, 11));
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setIcon(new ImageIcon("Imagenes/icono (1).png"));
-		btnNewButton.setBounds(1620, 55, 199, 46);
+		btnNewButton.setBounds(500, 55, 199, 46);
 		contentPane.add(btnNewButton);
 	
 		
