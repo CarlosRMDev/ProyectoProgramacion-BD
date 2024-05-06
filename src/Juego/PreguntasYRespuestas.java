@@ -4,6 +4,8 @@ package Juego;
 	import javax.swing.*;
 
 import InterfazInicio.Inter_juego;
+import Principal.Funciones;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -161,7 +163,10 @@ public class PreguntasYRespuestas extends JFrame {
         int categoriaPeorRendimiento = obtenerCategoriaPeorRendimiento();
         resultados.append("Categoría con mejor rendimiento: Pregunta ").append(categoriaMejorRendimiento + 1).append("\n");
         resultados.append("Categoría con peor rendimiento: Pregunta ").append(categoriaPeorRendimiento + 1).append("\n");
-
+        //Añado las funciones de recogida de datos
+        Funciones.ContadorPartidas2();
+        Funciones.NotaMaxima(respuestasCorrectas);
+        
         int option = JOptionPane.showConfirmDialog(this, resultados.toString() + "\n¿Quieres volver al menú principal?", "Resultados", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             dispose();

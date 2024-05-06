@@ -252,5 +252,323 @@ public class Funciones {
 			}
 		}
 	}
+	public static int SelectContador() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM AimBot e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"';";
+			ResultSet datos = conexion.ejecutarSelect(sentencia);
+			
+			while (datos.next()) {
+				return datos.getInt("NumPartidas");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	public static void PuntosMax(int puntos) {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			String sentencia = "UPDATE AimBot e	INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios SET e.PuntosMax = '" + puntos + "' WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"'";
+			String sentencia2 = "UPDATE AimBot e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios SET e.UltimaPuntuacion = '" + puntos + "' WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"'";
+			conexion.ejecutarInsertDeleteUpdate(sentencia2);
+			if (SelectPuntosMax() < puntos) {
+				conexion.ejecutarInsertDeleteUpdate(sentencia);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public static int SelectPuntosMax () {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM AimBot e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"';";
+			ResultSet datos = conexion.ejecutarSelect(sentencia);
+			
+			while (datos.next()) {
+				return datos.getInt("PuntosMax");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	public static int SelectUltPunt() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM AimBot e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"';";
+			ResultSet datos = conexion.ejecutarSelect(sentencia);
+			
+			while (datos.next()) {
+				return datos.getInt("UltimaPuntuacion");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	
+	/*
+	 * MÉTODOS PARA RECOPILAR LOS DATOS EN EL JUEGO DE ADIVINAR EL NÚMERO
+	 */
+	public static void ContadorPartidas1() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			String sentencia = "UPDATE Boom e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios SET e.PartidasJugadas = (PartidasJugadas+1)WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"'";
+			conexion.ejecutarInsertDeleteUpdate(sentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public static int SelectContador1 () {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM Boom e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"';";
+			ResultSet datos = conexion.ejecutarSelect(sentencia);
+			
+			while (datos.next()) {
+				return datos.getInt("PartidasJugadas");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	public static void RecordIntentos(int intentos) {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			String sentencia = "UPDATE Boom e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios SET e.RecordIntentos = '" + intentos + "' WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"'";
+			String sentencia2 = "UPDATE Boom e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios SET e.UltimaPuntuacion = '" + intentos + "' WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"'";
+			conexion.ejecutarInsertDeleteUpdate(sentencia2);
+			if (SelectRecordIntentos() < intentos) {
+				conexion.ejecutarInsertDeleteUpdate(sentencia);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public static int SelectRecordIntentos() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM Boom e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"';";
+			ResultSet datos = conexion.ejecutarSelect(sentencia);
+			
+			while (datos.next()) {
+				return datos.getInt("RecordIntentos");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	public static int SelectUltIntentos() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM Boom e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"';";
+			ResultSet datos = conexion.ejecutarSelect(sentencia);
+			
+			while (datos.next()) {
+				return datos.getInt("UltimaPuntuacion");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	
+	/*
+	 * MÉTODOS PARA RECOPILAR LOS DATOS EN EL JUEGO DE LAS PREGUNTAS
+	 */
+	public static void ContadorPartidas2() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			String sentencia = "UPDATE AcTrivial e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios SET e.NumeroIntentos = (NumeroIntentos+1)WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"'";
+			conexion.ejecutarInsertDeleteUpdate(sentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public static int SelectContador2() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM AcTrivial e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"';";
+			ResultSet datos = conexion.ejecutarSelect(sentencia);
+			
+			while (datos.next()) {
+				return datos.getInt("NumeroIntentos");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	public static void NotaMaxima(int nota) {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		try {
+			conexion.conectar();
+			String sentencia = "UPDATE AcTrivial e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios SET e.NotaMaxima = '" + nota + "' WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"'";
+			if (SelectNotaMaxima() < nota) {
+				conexion.ejecutarInsertDeleteUpdate(sentencia);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public static int SelectNotaMaxima() {
+		ConexionMySQL conexion = new ConexionMySQL("root", "test", "mydb");
+		
+		try {
+			conexion.conectar();
+			String sentencia = "SELECT * FROM AcTrivial e INNER JOIN Usuarios u ON e.Usuarios_idUsuarios = u.idUsuarios WHERE u.nombreUsuario = '" + InterfazInicio.InicioSesion.textFieldUsuario.getText()+"';";
+			ResultSet datos = conexion.ejecutarSelect(sentencia);
+			
+			while (datos.next()) {
+				return datos.getInt("NotaMaxima");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				conexion.desconectar();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
 }
 	

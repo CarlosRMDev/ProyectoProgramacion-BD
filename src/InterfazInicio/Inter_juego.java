@@ -76,7 +76,7 @@ public class Inter_juego extends JFrame {
 		btnNewButton.setFont(new Font("DejaVu Math TeX Gyre", Font.PLAIN, 11));
 		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setIcon(new ImageIcon("Imagenes/icono (1).png"));
-		btnNewButton.setBounds(1620, 55, 199, 46);
+		btnNewButton.setBounds(500, 55, 199, 46);
 		contentPane.add(btnNewButton);
 	
 		
